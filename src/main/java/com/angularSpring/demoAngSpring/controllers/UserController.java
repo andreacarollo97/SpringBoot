@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @CrossOrigin(origins = {"*"})
@@ -39,22 +40,9 @@ public class UserController {
     }
 
     @PutMapping("/edit/{id}")
-    public ResponseEntity<User> editUser(@PathVariable Long id, @RequestBody User user) {
-       User userAttuale = userService.findById(id);
-
-        if(userAttuale == null){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        try {
-            userAttuale.setNome(user.getNome());
-            userAttuale.setCognome(user.getCognome());
-            userAttuale.setEmail(user.getEmail());
-            userAttuale.setPassword(user.getPassword());
-            return new ResponseEntity<>(userService.save(userAttuale), HttpStatus.CREATED);
-        } catch (DataAccessException e){
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-   }
+    public ResponseEntity<User> editUser(@RequestBody User user) {
+        return new ResponseEntity<>(userService.save(user), HttpStatus.CREATED);
+    }
 
    @DeleteMapping("/elimina/{id}")
     public ResponseEntity<?> eliminaUser(@PathVariable Long id) {

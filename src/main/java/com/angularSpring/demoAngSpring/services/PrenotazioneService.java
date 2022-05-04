@@ -4,8 +4,10 @@ package com.angularSpring.demoAngSpring.services;
 
 
 
+import com.angularSpring.demoAngSpring.models.Auto;
 import com.angularSpring.demoAngSpring.models.Prenotazione;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface PrenotazioneService {
@@ -17,4 +19,6 @@ public interface PrenotazioneService {
     List<Prenotazione> findAll();
 
     void delete(Long id);
+
+    List<Auto> autoDisponibili(LocalDate dataInizio, LocalDate dataFine);
 }

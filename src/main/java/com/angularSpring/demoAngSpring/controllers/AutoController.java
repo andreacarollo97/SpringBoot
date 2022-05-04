@@ -38,20 +38,8 @@ public class AutoController {
     }
 
    @PutMapping("/edit/{id}")
-    public ResponseEntity<Auto> editAuto(@PathVariable Long id, @RequestBody Auto auto) {
-        Auto autoAttuale = autoService.findById(id);
-
-        if(autoAttuale == null){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        try {
-            autoAttuale.setMarca(auto.getMarca());
-            autoAttuale.setModello(auto.getModello());
-            autoAttuale.setTarga(auto.getTarga());
-            return new ResponseEntity<>(autoService.save(autoAttuale), HttpStatus.CREATED);
-        } catch (DataAccessException e){
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    public ResponseEntity<Auto> editAuto(@RequestBody Auto auto) {
+        return new ResponseEntity<>(autoService.save(auto), HttpStatus.OK);
    }
 
    @DeleteMapping("/elimina/{id}")

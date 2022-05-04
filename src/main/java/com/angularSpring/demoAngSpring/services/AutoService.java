@@ -12,6 +12,8 @@ public interface AutoService {
 
     Auto findById(Long id);
 
+    void setAuto(Auto auto, Auto autoAttuale);
+
     List<Auto> findAll();
 
     void delete(Long id);
