@@ -1,7 +1,10 @@
 package com.angularSpring.demoAngSpring.services;
 
-import com.angularSpring.demoAngSpring.repository.UserRepository;
+import com.angularSpring.demoAngSpring.dto.UserDetailResponse;
+import com.angularSpring.demoAngSpring.dto.UserResponse;
+import com.angularSpring.demoAngSpring.mapper.UserConverter;
 import com.angularSpring.demoAngSpring.models.User;
+import com.angularSpring.demoAngSpring.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,21 +14,29 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     @Autowired
+    private UserConverter userConverter;
+
+    @Autowired
     private UserRepository userRepository;
 
+
     @Override
-    public User save(User user) {
-        return userRepository.save(user);
+    public UserDetailResponse save(UserDetailResponse userDetailResponse) {
+        User user = userConverter.convertDetailDtoToEntity(userDetailResponse);
+        user = userRepository.save(user);
+        return userConverter.convertEntityToDetailDto(user);
     }
 
     @Override
-    public User findById(Long id) {
-        return userRepository.findById(id).orElse(null);
+    public UserDetailResponse findById(Long id) {
+        User user = userRepository.getUserById(id);
+        return userConverter.convertEntityToDetailDto(user);
     }
 
     @Override
-    public List<User> findAll() {
-        return userRepository.findAll();
+    public List<UserResponse> findAll() {
+        List<User> users = userRepository.getAllBy();
+        return userConverter.entityToDto(users);
     }
 
     @Override

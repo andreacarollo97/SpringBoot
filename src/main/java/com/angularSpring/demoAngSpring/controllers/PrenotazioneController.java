@@ -1,13 +1,12 @@
 package com.angularSpring.demoAngSpring.controllers;
 
 
-import com.angularSpring.demoAngSpring.dto.ListAutoRequest;
+
+import com.angularSpring.demoAngSpring.dto.PrenotazioneResponse;
 import com.angularSpring.demoAngSpring.models.Auto;
-import com.angularSpring.demoAngSpring.models.Prenotazione;
 
 import com.angularSpring.demoAngSpring.services.PrenotazioneService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,13 +20,12 @@ import java.util.List;
 @RequestMapping("/api/prenotazione")
 public class PrenotazioneController {
 
+
     @Autowired
     private PrenotazioneService prenotazioneService;
 
-
-
     @GetMapping("/elenco")
-    public ResponseEntity<List<Prenotazione>> elencoPrenotazioni() {
+    public ResponseEntity<List<PrenotazioneResponse>> elencoPrenotazioni() {
         return new ResponseEntity<>(prenotazioneService.findAll(), HttpStatus.OK);
     }
 
@@ -40,18 +38,18 @@ public class PrenotazioneController {
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<Prenotazione> ottieniPrenotazione(@PathVariable Long id){
+    public ResponseEntity<PrenotazioneResponse> ottieniPrenotazione(@PathVariable Long id){
         return new ResponseEntity<>(prenotazioneService.findById(id),HttpStatus.OK);
     }
 
     @PostMapping("/salva")
-    public ResponseEntity<Prenotazione> salvaPrenotazione(@RequestBody Prenotazione prenotazione) {
-        return new ResponseEntity<>(prenotazioneService.save(prenotazione), HttpStatus.CREATED);
+    public ResponseEntity<PrenotazioneResponse> salvaPrenotazione(@RequestBody PrenotazioneResponse prenotazioneResponse) {
+        return new ResponseEntity<>(prenotazioneService.save(prenotazioneResponse), HttpStatus.CREATED);
     }
 
    @PutMapping("/edit/{id}")
-    public ResponseEntity<Prenotazione> editPrenotazione(@RequestBody Prenotazione prenotazione) {
-       return new ResponseEntity<>(prenotazioneService.save(prenotazione), HttpStatus.CREATED);
+    public ResponseEntity<PrenotazioneResponse> editPrenotazione(@RequestBody PrenotazioneResponse prenotazioneResponse) {
+       return new ResponseEntity<>(prenotazioneService.save(prenotazioneResponse), HttpStatus.CREATED);
    }
 
    @DeleteMapping("/elimina/{id}")

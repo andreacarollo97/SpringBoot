@@ -9,4 +9,6 @@ import java.util.List;
 public interface AutoRepository extends JpaRepository<Auto, Long> {
 
     List<Auto> getAutoByIdNotIn(List<Long> autoId);
+    List<Auto> getAllBy();
+    Auto getAutoById(Long autoId);
 }

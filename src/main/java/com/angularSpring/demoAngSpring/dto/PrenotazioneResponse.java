@@ -1,35 +1,39 @@
-package com.angularSpring.demoAngSpring.models;
+package com.angularSpring.demoAngSpring.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.angularSpring.demoAngSpring.models.Auto;
+import com.angularSpring.demoAngSpring.models.User;
 
-import javax.persistence.*;
 import java.time.LocalDate;
 
-@Entity
-@Table(name = "prenotazioni")
-public class Prenotazione {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
+public class PrenotazioneResponse {
+
     private Long id;
 
-    @Column
     private LocalDate dataInizio;
 
-    @Column
     private LocalDate dataFine;
 
-    @Column
     private int stato;
 
+    private Auto auto;
 
-    @ManyToOne()
-    @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne()
-    @JoinColumn(name = "auto_id")
-    private Auto auto;
+    public Auto getAuto() {
+        return auto;
+    }
+
+    public void setAuto(Auto auto) {
+        this.auto = auto;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public Long getId() {
         return id;
@@ -38,6 +42,7 @@ public class Prenotazione {
     public void setId(Long id) {
         this.id = id;
     }
+
 
     public LocalDate getDataInizio() {
         return dataInizio;
@@ -63,19 +68,5 @@ public class Prenotazione {
         this.stato = stato;
     }
 
-    public User getUser() {
-        return user;
-    }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public Auto getAuto() {
-        return auto;
-    }
-
-    public void setAuto(Auto auto) {
-        this.auto = auto;
-    }
 }

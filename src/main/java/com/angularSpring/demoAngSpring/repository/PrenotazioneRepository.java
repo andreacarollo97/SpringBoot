@@ -11,4 +11,7 @@ public interface PrenotazioneRepository extends JpaRepository<Prenotazione, Long
 
     List<Prenotazione> getPrenotazionesByDataInizioLessThanAndDataFineGreaterThan(LocalDate dataFine,LocalDate dataInizio);
 
+    List<Prenotazione> getAllBy();
+
+    Prenotazione getPrenotazioneById (Long prenotazioneId);
 }

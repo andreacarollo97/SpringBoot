@@ -2,19 +2,19 @@ package com.angularSpring.demoAngSpring.services;
 
 
 
+import com.angularSpring.demoAngSpring.dto.AutoResponse;
 import com.angularSpring.demoAngSpring.models.Auto;
 
 import java.util.List;
 
 public interface AutoService {
 
-    Auto save(Auto auto);
+    AutoResponse save(AutoResponse autoResponse);
 
-    Auto findById(Long id);
+    AutoResponse findById(Long id);
 
-    void setAuto(Auto auto, Auto autoAttuale);
-
-    List<Auto> findAll();
+    List<AutoResponse> findAll();
 
     void delete(Long id);
+
 }

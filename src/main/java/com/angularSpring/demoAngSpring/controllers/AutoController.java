@@ -1,7 +1,10 @@
 package com.angularSpring.demoAngSpring.controllers;
 
 
+import com.angularSpring.demoAngSpring.dto.AutoResponse;
+import com.angularSpring.demoAngSpring.mapper.AutoConverter;
 import com.angularSpring.demoAngSpring.models.Auto;
+import com.angularSpring.demoAngSpring.repository.AutoRepository;
 import com.angularSpring.demoAngSpring.services.AutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -21,25 +24,27 @@ public class AutoController {
     private AutoService autoService;
 
 
+
+
     @GetMapping("/elenco")
-    public ResponseEntity<List<Auto>> elencoAuto() {
+    public ResponseEntity<List<AutoResponse>> elencoAuto() {
         return new ResponseEntity<>(autoService.findAll(), HttpStatus.OK);
     }
 
 
     @GetMapping("/detail/{id}")
-    public ResponseEntity<Auto> ottieniAuto(@PathVariable Long id){
+    public ResponseEntity<AutoResponse> ottieniAuto(@PathVariable Long id){
         return new ResponseEntity<>(autoService.findById(id),HttpStatus.OK);
     }
 
     @PostMapping("/salva")
-    public ResponseEntity<Auto> salvaAuto(@RequestBody Auto auto) {
-        return new ResponseEntity<>(autoService.save(auto), HttpStatus.CREATED);
+    public ResponseEntity<AutoResponse> salvaAuto(@RequestBody AutoResponse autoResponse) {
+        return new ResponseEntity<>(autoService.save(autoResponse), HttpStatus.CREATED);
     }
 
    @PutMapping("/edit/{id}")
-    public ResponseEntity<Auto> editAuto(@RequestBody Auto auto) {
-        return new ResponseEntity<>(autoService.save(auto), HttpStatus.OK);
+    public ResponseEntity<AutoResponse> editAuto(@RequestBody AutoResponse autoResponse) {
+       return new ResponseEntity<>(autoService.save(autoResponse), HttpStatus.OK);
    }
 
    @DeleteMapping("/elimina/{id}")

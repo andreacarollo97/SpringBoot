@@ -1,34 +1,21 @@
-package com.angularSpring.demoAngSpring.models;
+package com.angularSpring.demoAngSpring.dto;
 
-import lombok.Data;
 
-import javax.persistence.*;
-import java.util.List;
+public class AutoResponse {
 
-@Entity
-@Table(name = "auto")
-public class Auto {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
     private Long id;
 
-    @Column
     private String marca;
 
-    @Column
     private String modello;
 
-    @Column
     private String targa;
 
-
-    @OneToMany(mappedBy = "auto")
-    private List<Prenotazione> prenotazioni;
 
     public Long getId() {
         return id;
     }
+
 
     public void setId(Long id) {
         this.id = id;
@@ -57,6 +44,4 @@ public class Auto {
     public void setTarga(String targa) {
         this.targa = targa;
     }
-
-
 }

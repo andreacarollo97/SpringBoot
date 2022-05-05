@@ -4,6 +4,8 @@ package com.angularSpring.demoAngSpring.services;
 
 
 
+import com.angularSpring.demoAngSpring.dto.AutoResponse;
+import com.angularSpring.demoAngSpring.dto.PrenotazioneResponse;
 import com.angularSpring.demoAngSpring.models.Auto;
 import com.angularSpring.demoAngSpring.models.Prenotazione;
 
@@ -12,11 +14,11 @@ import java.util.List;
 
 public interface PrenotazioneService {
 
-    Prenotazione save(Prenotazione prenotazione);
+    PrenotazioneResponse save(PrenotazioneResponse prenotazioneResponse);
 
-    Prenotazione findById(Long id);
+    PrenotazioneResponse findById(Long id);
 
-    List<Prenotazione> findAll();
+    List<PrenotazioneResponse> findAll();
 
     void delete(Long id);
 

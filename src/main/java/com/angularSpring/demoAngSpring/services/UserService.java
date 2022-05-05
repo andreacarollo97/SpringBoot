@@ -1,16 +1,18 @@
 package com.angularSpring.demoAngSpring.services;
 
+import com.angularSpring.demoAngSpring.dto.UserDetailResponse;
+import com.angularSpring.demoAngSpring.dto.UserResponse;
 import com.angularSpring.demoAngSpring.models.User;
 
 import java.util.List;
 
 public interface UserService {
 
-    User save(User user);
+    UserDetailResponse save(UserDetailResponse userDetailResponse);
 
-    User findById(Long id);
+    UserDetailResponse findById(Long id);
 
-    List<User> findAll();
+    List<UserResponse> findAll();
 
     void delete(Long id);
 }
