@@ -11,6 +11,8 @@ public class UserResponse {
 
     private String email;
 
+    private String ruolo;
+
 
     public Long getId() {
         return id;
@@ -44,5 +46,11 @@ public class UserResponse {
         this.email = email;
     }
 
+    public String getRuolo() {
+        return ruolo;
+    }
 
+    public void setRuolo(String ruolo) {
+        this.ruolo = ruolo;
+    }
 }

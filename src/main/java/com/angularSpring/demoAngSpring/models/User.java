@@ -1,7 +1,11 @@
 package com.angularSpring.demoAngSpring.models;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
+
 
 @Entity
 @Table(name = "users")
@@ -22,6 +26,9 @@ public class User {
 
     @Column
     private String password;
+
+    @Column
+    private String ruolo;
 
 
     @OneToMany(mappedBy = "user")
@@ -66,5 +73,11 @@ public class User {
         this.password = password;
     }
 
+    public String getRuolo() {
+        return ruolo;
+    }
 
+    public void setRuolo(String ruolo) {
+        this.ruolo = ruolo;
+    }
 }

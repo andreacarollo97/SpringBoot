@@ -17,6 +17,7 @@ public class UserConverter {
         userResponse.setNome(user.getNome());
         userResponse.setCognome(user.getCognome());
         userResponse.setEmail(user.getEmail());
+        userResponse.setRuolo(user.getRuolo());
         return userResponse;
     }
 
@@ -26,6 +27,7 @@ public class UserConverter {
         user.setNome(userResponse.getNome());
         user.setCognome(userResponse.getCognome());
         user.setEmail(userResponse.getEmail());
+        user.setRuolo(userResponse.getRuolo());
         return user;
     }
 
@@ -37,6 +39,7 @@ public class UserConverter {
             response.setNome(user.getNome());
             response.setCognome(user.getCognome());
             response.setEmail(user.getEmail());
+            response.setRuolo(user.getRuolo());
             userResponses.add(response);
         }
         return userResponses;
@@ -49,6 +52,7 @@ public class UserConverter {
         userDetailResponse.setCognome(user.getCognome());
         userDetailResponse.setEmail(user.getEmail());
         userDetailResponse.setPassword(user.getPassword());
+        userDetailResponse.setRuolo(user.getRuolo());
         return userDetailResponse;
     }
 
@@ -59,6 +63,7 @@ public class UserConverter {
         user.setCognome(userDetailResponse.getCognome());
         user.setEmail(userDetailResponse.getEmail());
         user.setPassword(userDetailResponse.getPassword());
+        user.setRuolo(userDetailResponse.getRuolo());
         return user;
     }
 
@@ -71,6 +76,7 @@ public class UserConverter {
             response.setCognome(user.getCognome());
             response.setEmail(user.getEmail());
             response.setPassword(user.getPassword());
+            response.setRuolo(user.getRuolo());
             userDetailResponses.add(response);
         }
         return userDetailResponses;

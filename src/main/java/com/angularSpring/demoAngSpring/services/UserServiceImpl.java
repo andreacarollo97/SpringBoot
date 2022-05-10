@@ -8,9 +8,11 @@ import com.angularSpring.demoAngSpring.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
 
     @Autowired
@@ -34,9 +36,25 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public UserDetailResponse findByEmail(String email) {
+        User user = userRepository.getUserByEmail(email);
+        return userConverter.convertEntityToDetailDto(user);
+    }
+
+    @Override
     public List<UserResponse> findAll() {
         List<User> users = userRepository.getAllBy();
         return userConverter.entityToDto(users);
+    }
+
+    @Override
+    public boolean existsByEmail(String email) {
+        return userRepository.existsByEmail(email);
+    }
+
+    @Override
+    public boolean existsByNome(String nome) {
+        return userRepository.existsByNome(nome);
     }
 
     @Override

@@ -1,7 +1,5 @@
 package com.angularSpring.demoAngSpring.services;
 
-
-import com.angularSpring.demoAngSpring.dto.AutoResponse;
 import com.angularSpring.demoAngSpring.dto.PrenotazioneResponse;
 import com.angularSpring.demoAngSpring.mapper.PrenotazioneConverter;
 import com.angularSpring.demoAngSpring.models.Auto;
@@ -48,7 +46,7 @@ public class PrenotazioneServiceImpl implements PrenotazioneService {
 
     @Override
     public void delete(Long id) {
-
+        prenotazioneRepository.deleteById(id);
     }
 
     @Override

@@ -12,7 +12,12 @@ public interface UserService {
 
     UserDetailResponse findById(Long id);
 
+    UserDetailResponse findByEmail(String email);
+
     List<UserResponse> findAll();
+
+    boolean existsByEmail(String email);
+    boolean existsByNome(String nome);
 
     void delete(Long id);
 }
