@@ -52,6 +52,11 @@ public class PrenotazioneController {
        return new ResponseEntity<>(prenotazioneService.save(prenotazioneResponse), HttpStatus.CREATED);
    }
 
+    @PutMapping("/validate/{id}")
+    public ResponseEntity<PrenotazioneResponse> validatePrenotazione(@PathVariable Long id) {
+        return new ResponseEntity<>(prenotazioneService.validate(id), HttpStatus.OK);
+    }
+
    @DeleteMapping("/elimina/{id}")
     public ResponseEntity<?> eliminaPrenotazione(@PathVariable Long id) {
        prenotazioneService.delete(id);

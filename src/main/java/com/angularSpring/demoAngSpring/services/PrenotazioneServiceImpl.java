@@ -33,6 +33,14 @@ public class PrenotazioneServiceImpl implements PrenotazioneService {
     }
 
     @Override
+    public PrenotazioneResponse validate(Long id) {
+        Prenotazione prenotazione = prenotazioneRepository.getPrenotazioneById(id);
+        prenotazione.setStato(1);
+        prenotazione = prenotazioneRepository.save(prenotazione);
+        return prenotazioneConverter.convertEntityToDto(prenotazione);
+    }
+
+    @Override
     public PrenotazioneResponse findById(Long id) {
         Prenotazione prenotazione = prenotazioneRepository.getPrenotazioneById(id);
         return prenotazioneConverter.convertEntityToDto(prenotazione);

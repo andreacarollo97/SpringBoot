@@ -14,4 +14,5 @@ public interface PrenotazioneRepository extends JpaRepository<Prenotazione, Long
     List<Prenotazione> getAllBy();
 
     Prenotazione getPrenotazioneById (Long prenotazioneId);
+
 }

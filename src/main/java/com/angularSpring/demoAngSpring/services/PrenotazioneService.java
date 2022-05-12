@@ -16,6 +16,8 @@ public interface PrenotazioneService {
 
     PrenotazioneResponse save(PrenotazioneResponse prenotazioneResponse);
 
+    PrenotazioneResponse validate(Long id);
+
     PrenotazioneResponse findById(Long id);
 
     List<PrenotazioneResponse> findAll();

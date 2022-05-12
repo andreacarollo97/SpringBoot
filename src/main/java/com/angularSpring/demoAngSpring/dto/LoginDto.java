@@ -10,6 +10,11 @@ public class LoginDto {
         return email;
     }
 
+    public LoginDto(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
+
     public void setEmail(String email) {
         this.email = email;
     }

@@ -6,6 +6,7 @@ import com.angularSpring.demoAngSpring.mapper.UserConverter;
 import com.angularSpring.demoAngSpring.models.User;
 import com.angularSpring.demoAngSpring.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -17,14 +18,17 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserConverter userConverter;
-
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
 
     @Override
     public UserDetailResponse save(UserDetailResponse userDetailResponse) {
         User user = userConverter.convertDetailDtoToEntity(userDetailResponse);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         user = userRepository.save(user);
         return userConverter.convertEntityToDetailDto(user);
     }
@@ -45,16 +49,6 @@ public class UserServiceImpl implements UserService {
     public List<UserResponse> findAll() {
         List<User> users = userRepository.getAllBy();
         return userConverter.entityToDto(users);
-    }
-
-    @Override
-    public boolean existsByEmail(String email) {
-        return userRepository.existsByEmail(email);
-    }
-
-    @Override
-    public boolean existsByNome(String nome) {
-        return userRepository.existsByNome(nome);
     }
 
     @Override

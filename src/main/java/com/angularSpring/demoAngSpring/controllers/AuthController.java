@@ -3,6 +3,7 @@ package com.angularSpring.demoAngSpring.controllers;
 import com.angularSpring.demoAngSpring.dto.LoginDto;
 import com.angularSpring.demoAngSpring.dto.TokenDto;
 import com.angularSpring.demoAngSpring.jwt.JwtProvider;
+import com.angularSpring.demoAngSpring.security.UserLogged;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,7 +37,8 @@ public class AuthController {
                 authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginDto.getEmail(),loginDto.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String token = jwtProvider.generateToken(authentication);
-        TokenDto tokenDto = new TokenDto(token);
+        UserLogged userLogged = (UserLogged) authentication.getPrincipal();
+        TokenDto tokenDto = new TokenDto(token, userLogged.getRuolo());
         return new ResponseEntity(tokenDto, HttpStatus.OK);
     }
 

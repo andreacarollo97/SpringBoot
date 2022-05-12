@@ -16,8 +16,5 @@ public interface UserService {
 
     List<UserResponse> findAll();
 
-    boolean existsByEmail(String email);
-    boolean existsByNome(String nome);
-
     void delete(Long id);
 }

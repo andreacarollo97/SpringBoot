@@ -23,7 +23,7 @@ public class Auto {
     private String targa;
 
 
-    @OneToMany(mappedBy = "auto")
+    @OneToMany(mappedBy = "auto", cascade = CascadeType.ALL)
     private List<Prenotazione> prenotazioni;
 
     public Long getId() {

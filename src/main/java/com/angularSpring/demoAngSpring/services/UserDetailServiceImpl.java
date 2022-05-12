@@ -4,6 +4,7 @@ package com.angularSpring.demoAngSpring.services;
 import com.angularSpring.demoAngSpring.dto.UserDetailResponse;
 import com.angularSpring.demoAngSpring.mapper.UserConverter;
 import com.angularSpring.demoAngSpring.models.User;
+import com.angularSpring.demoAngSpring.repository.UserRepository;
 import com.angularSpring.demoAngSpring.security.UserLogged;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,15 +17,15 @@ import org.springframework.stereotype.Service;
 public class UserDetailServiceImpl implements UserDetailsService {
 
     @Autowired
-    UserService userService;
+    UserRepository userRepository;
 
     @Autowired
     UserConverter userConverter;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-         UserDetailResponse user = userService.findByEmail(email);
-         return UserLogged.build(userConverter.convertDetailDtoToEntity(user));
+         User user = userRepository.getUserByEmail(email);
+         return UserLogged.build(user);
     }
 
 

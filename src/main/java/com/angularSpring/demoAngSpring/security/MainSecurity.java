@@ -19,7 +19,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import java.net.PasswordAuthentication;
+
+
+
 
 @Configuration
 @EnableWebSecurity
@@ -66,7 +68,7 @@ public class MainSecurity extends WebSecurityConfigurerAdapter {
         http.cors().and().csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/auth/**").permitAll()
-                .anyRequest().authenticated()
+                //.anyRequest().authenticated()
                 .and()
                 .exceptionHandling().authenticationEntryPoint(jwtEntryPoint)
                 .and()
