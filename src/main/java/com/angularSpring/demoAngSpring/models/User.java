@@ -31,7 +31,7 @@ public class User {
     private String ruolo;
 
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
     private List<Prenotazione> prenotazioni;
 
     public Long getId() {

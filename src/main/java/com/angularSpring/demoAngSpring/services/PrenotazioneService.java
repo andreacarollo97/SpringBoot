@@ -4,19 +4,18 @@ package com.angularSpring.demoAngSpring.services;
 
 
 
-import com.angularSpring.demoAngSpring.dto.AutoResponse;
+import com.angularSpring.demoAngSpring.dto.PrenotazioneRequest;
 import com.angularSpring.demoAngSpring.dto.PrenotazioneResponse;
 import com.angularSpring.demoAngSpring.models.Auto;
-import com.angularSpring.demoAngSpring.models.Prenotazione;
 
 import java.time.LocalDate;
 import java.util.List;
 
 public interface PrenotazioneService {
 
-    PrenotazioneResponse save(PrenotazioneResponse prenotazioneResponse);
+    void save(PrenotazioneRequest prenotazioneRequest);
 
-    PrenotazioneResponse validate(Long id);
+    void validate(Long id);
 
     PrenotazioneResponse findById(Long id);
 

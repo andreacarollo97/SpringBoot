@@ -2,6 +2,7 @@ package com.angularSpring.demoAngSpring.controllers;
 
 
 
+import com.angularSpring.demoAngSpring.dto.PrenotazioneRequest;
 import com.angularSpring.demoAngSpring.dto.PrenotazioneResponse;
 import com.angularSpring.demoAngSpring.models.Auto;
 
@@ -11,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.nio.file.LinkOption;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -43,19 +45,23 @@ public class PrenotazioneController {
     }
 
     @PostMapping("/salva")
-    public ResponseEntity<PrenotazioneResponse> salvaPrenotazione(@RequestBody PrenotazioneResponse prenotazioneResponse) {
-        return new ResponseEntity<>(prenotazioneService.save(prenotazioneResponse), HttpStatus.CREATED);
+    public ResponseEntity<?> salvaPrenotazione(@RequestBody PrenotazioneRequest prenotazioneRequest) {
+        prenotazioneService.save(prenotazioneRequest);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
    @PutMapping("/edit/{id}")
-    public ResponseEntity<PrenotazioneResponse> editPrenotazione(@RequestBody PrenotazioneResponse prenotazioneResponse) {
-       return new ResponseEntity<>(prenotazioneService.save(prenotazioneResponse), HttpStatus.CREATED);
+   public ResponseEntity<PrenotazioneResponse> editPrenotazione(@RequestBody PrenotazioneRequest prenotazioneRequest) {
+       prenotazioneService.save(prenotazioneRequest);
+       return new ResponseEntity<>(HttpStatus.OK);
    }
 
-    @PutMapping("/validate/{id}")
-    public ResponseEntity<PrenotazioneResponse> validatePrenotazione(@PathVariable Long id) {
-        return new ResponseEntity<>(prenotazioneService.validate(id), HttpStatus.OK);
+    @PostMapping("/validate/{id}")
+    public ResponseEntity<?> validatePrenotazione(@PathVariable Long id) {
+        prenotazioneService.validate(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
+
 
    @DeleteMapping("/elimina/{id}")
     public ResponseEntity<?> eliminaPrenotazione(@PathVariable Long id) {

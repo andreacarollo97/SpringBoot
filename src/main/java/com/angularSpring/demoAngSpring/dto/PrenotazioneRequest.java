@@ -1,11 +1,8 @@
 package com.angularSpring.demoAngSpring.dto;
 
-import com.angularSpring.demoAngSpring.models.Auto;
-import com.angularSpring.demoAngSpring.models.User;
-
 import java.time.LocalDate;
 
-public class PrenotazioneResponse {
+public class PrenotazioneRequest {
 
     private Long id;
 
@@ -15,25 +12,9 @@ public class PrenotazioneResponse {
 
     private int stato;
 
-    private Auto auto;
+    private Long autoId;
 
-    private User user;
-
-    public Auto getAuto() {
-        return auto;
-    }
-
-    public void setAuto(Auto auto) {
-        this.auto = auto;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
+    private Long userId;
 
     public Long getId() {
         return id;
@@ -42,7 +23,6 @@ public class PrenotazioneResponse {
     public void setId(Long id) {
         this.id = id;
     }
-
 
     public LocalDate getDataInizio() {
         return dataInizio;
@@ -68,7 +48,19 @@ public class PrenotazioneResponse {
         this.stato = stato;
     }
 
+    public Long getAutoId() {
+        return autoId;
+    }
 
+    public void setAutoId(Long autoId) {
+        this.autoId = autoId;
+    }
 
+    public Long getUserId() {
+        return userId;
+    }
 
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 }

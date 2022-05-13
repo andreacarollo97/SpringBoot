@@ -1,11 +1,15 @@
 package com.angularSpring.demoAngSpring.services;
 
+import com.angularSpring.demoAngSpring.dto.AutoResponse;
+import com.angularSpring.demoAngSpring.dto.PrenotazioneRequest;
 import com.angularSpring.demoAngSpring.dto.PrenotazioneResponse;
 import com.angularSpring.demoAngSpring.mapper.PrenotazioneConverter;
 import com.angularSpring.demoAngSpring.models.Auto;
+import com.angularSpring.demoAngSpring.models.User;
 import com.angularSpring.demoAngSpring.repository.AutoRepository;
 import com.angularSpring.demoAngSpring.repository.PrenotazioneRepository;
 import com.angularSpring.demoAngSpring.models.Prenotazione;
+import com.angularSpring.demoAngSpring.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,21 +28,26 @@ public class PrenotazioneServiceImpl implements PrenotazioneService {
     @Autowired
     private AutoRepository autoRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
 
     @Override
-    public PrenotazioneResponse save(PrenotazioneResponse prenotazioneResponse) {
-        Prenotazione prenotazione = prenotazioneConverter.convertDtoToEntity(prenotazioneResponse);
-        prenotazione = prenotazioneRepository.save(prenotazione);
-        return prenotazioneConverter.convertEntityToDto(prenotazione);
+    public void save(PrenotazioneRequest prenotazioneRequest) {
+        Auto auto = autoRepository.getAutoById(prenotazioneRequest.getAutoId());
+        User user = userRepository.getUserById(prenotazioneRequest.getUserId());
+        Prenotazione prenotazione = prenotazioneConverter.convertRequestToEntity(prenotazioneRequest,auto,user);
+        prenotazioneRepository.save(prenotazione);
     }
 
+
     @Override
-    public PrenotazioneResponse validate(Long id) {
+    public void validate(Long id) {
         Prenotazione prenotazione = prenotazioneRepository.getPrenotazioneById(id);
         prenotazione.setStato(1);
-        prenotazione = prenotazioneRepository.save(prenotazione);
-        return prenotazioneConverter.convertEntityToDto(prenotazione);
+        prenotazioneRepository.save(prenotazione);
     }
+
 
     @Override
     public PrenotazioneResponse findById(Long id) {

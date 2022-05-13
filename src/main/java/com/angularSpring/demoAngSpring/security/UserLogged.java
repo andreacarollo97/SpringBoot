@@ -8,6 +8,8 @@ import java.util.Collection;
 import java.util.List;
 
 public class UserLogged implements UserDetails {
+
+    private Long id;
     private String nome;
     private String cognome;
     private String email;
@@ -43,6 +45,14 @@ public class UserLogged implements UserDetails {
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     @Override
@@ -86,7 +96,8 @@ public class UserLogged implements UserDetails {
         this.ruolo = ruolo;
     }
 
-    public UserLogged(String nome, String cognome, String email, String password, String ruolo) {
+    public UserLogged(Long id, String nome, String cognome, String email, String password, String ruolo) {
+        this.id = id;
         this.nome = nome;
         this.cognome = cognome;
         this.email = email;
@@ -95,7 +106,6 @@ public class UserLogged implements UserDetails {
     }
 
     public static UserLogged build(User user){
-        String authority = user.getRuolo();
-        return new UserLogged(user.getNome(),user.getCognome(),user.getEmail(),user.getPassword(),authority);
+        return new UserLogged(user.getId(), user.getNome(),user.getCognome(),user.getEmail(),user.getPassword(),user.getRuolo());
     };
 }

@@ -38,7 +38,7 @@ public class AuthController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String token = jwtProvider.generateToken(authentication);
         UserLogged userLogged = (UserLogged) authentication.getPrincipal();
-        TokenDto tokenDto = new TokenDto(token, userLogged.getRuolo());
+        TokenDto tokenDto = new TokenDto(token, userLogged.getRuolo(), userLogged.getId());
         return new ResponseEntity(tokenDto, HttpStatus.OK);
     }
 

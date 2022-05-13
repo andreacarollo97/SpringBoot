@@ -38,10 +38,8 @@ public class UserController {
         return new ResponseEntity<>(userService.save(userDetailResponse), HttpStatus.CREATED);
     }
 
-    @PutMapping("/edit/{id}")
-    public ResponseEntity<UserDetailResponse> editUser(@RequestBody UserDetailResponse userDetailResponse) {
-        return new ResponseEntity<>(userService.save(userDetailResponse), HttpStatus.CREATED);
-    }
+
+
 
    @DeleteMapping("/elimina/{id}")
     public ResponseEntity<?> eliminaUser(@PathVariable Long id) {
