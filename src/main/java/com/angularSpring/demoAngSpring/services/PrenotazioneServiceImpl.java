@@ -62,6 +62,12 @@ public class PrenotazioneServiceImpl implements PrenotazioneService {
     }
 
     @Override
+    public List<PrenotazioneResponse> findAllbyUser(User user) {
+        List<Prenotazione> prenotazioni = prenotazioneRepository.getAllByUser(user);
+        return prenotazioneConverter.entityToDto(prenotazioni);
+    }
+
+    @Override
     public void delete(Long id) {
         prenotazioneRepository.deleteById(id);
     }
@@ -84,5 +90,7 @@ public class PrenotazioneServiceImpl implements PrenotazioneService {
             return autoDisponibili;
         }
     }
+
+
 
 }

@@ -4,9 +4,13 @@ package com.angularSpring.demoAngSpring.controllers;
 
 import com.angularSpring.demoAngSpring.dto.PrenotazioneRequest;
 import com.angularSpring.demoAngSpring.dto.PrenotazioneResponse;
+import com.angularSpring.demoAngSpring.mapper.UserConverter;
 import com.angularSpring.demoAngSpring.models.Auto;
 
+import com.angularSpring.demoAngSpring.models.User;
+import com.angularSpring.demoAngSpring.services.AutoService;
 import com.angularSpring.demoAngSpring.services.PrenotazioneService;
+import com.angularSpring.demoAngSpring.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,9 +30,23 @@ public class PrenotazioneController {
     @Autowired
     private PrenotazioneService prenotazioneService;
 
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private UserConverter userConverter;
+
     @GetMapping("/elenco")
     public ResponseEntity<List<PrenotazioneResponse>> elencoPrenotazioni() {
         return new ResponseEntity<>(prenotazioneService.findAll(), HttpStatus.OK);
+    }
+
+    @GetMapping("/prenotazioni/{userId}")
+    public ResponseEntity<List<PrenotazioneResponse>> elencoMiePrenotazioni(@PathVariable Long userId) {
+        return new ResponseEntity<>(
+                prenotazioneService.findAllbyUser(
+                        userConverter.convertDtoToEntity(userService.findById(userId))),
+                HttpStatus.OK);
     }
 
     @GetMapping("/listauto")

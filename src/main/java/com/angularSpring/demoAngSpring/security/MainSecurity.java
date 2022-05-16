@@ -69,11 +69,17 @@ public class MainSecurity extends WebSecurityConfigurerAdapter {
             "/api/prenotazione/edit/**",
             "/api/prenotazione/elimina/**",
             "/api/prenotazione/detail/**",
-            "/api/auto/**",
+            "/api/auto/edit/**",
+            "/api/auto/elimina/**",
+            "/api/auto/detail/**",
+            "/api/auto/salva/**",
+
     };
     private static final String[] USER = {
             "/api/prenotazione/listauto",
             "/api/prenotazione/salva",
+            "/api/prenotazione/prenotazioni/**",
+            "/api/auto/elenco",
     };
 
     @Override

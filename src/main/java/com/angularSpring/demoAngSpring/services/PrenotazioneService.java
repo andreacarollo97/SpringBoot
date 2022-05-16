@@ -7,6 +7,7 @@ package com.angularSpring.demoAngSpring.services;
 import com.angularSpring.demoAngSpring.dto.PrenotazioneRequest;
 import com.angularSpring.demoAngSpring.dto.PrenotazioneResponse;
 import com.angularSpring.demoAngSpring.models.Auto;
+import com.angularSpring.demoAngSpring.models.User;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -24,4 +25,6 @@ public interface PrenotazioneService {
     void delete(Long id);
 
     List<Auto> autoDisponibili(LocalDate dataInizio, LocalDate dataFine);
+
+    List<PrenotazioneResponse> findAllbyUser(User user);
 }
