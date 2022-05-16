@@ -3,7 +3,10 @@ package com.angularSpring.demoAngSpring.controllers;
 import com.angularSpring.demoAngSpring.dto.LoginDto;
 import com.angularSpring.demoAngSpring.dto.TokenDto;
 import com.angularSpring.demoAngSpring.jwt.JwtProvider;
+import com.angularSpring.demoAngSpring.mapper.UserConverter;
+import com.angularSpring.demoAngSpring.models.User;
 import com.angularSpring.demoAngSpring.security.UserLogged;
+import com.angularSpring.demoAngSpring.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +28,13 @@ public class AuthController {
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    private JwtProvider jwtProvider;
+    private UserService userService;
+
+    @Autowired
+    private UserConverter userConverter;
+
+    @Autowired
+    JwtProvider jwtProvider;
 
 
     @PostMapping("/login")

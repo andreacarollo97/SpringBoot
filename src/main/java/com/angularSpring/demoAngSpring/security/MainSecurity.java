@@ -63,12 +63,28 @@ public class MainSecurity extends WebSecurityConfigurerAdapter {
         return super.authenticationManager();
     }
 
+
+    private static final String[] ADMIN = {
+            "/api/user/**",
+            "/api/prenotazione/edit/**",
+            "/api/prenotazione/elimina/**",
+            "/api/prenotazione/detail/**",
+            "/api/auto/**",
+    };
+    private static final String[] USER = {
+            "/api/prenotazione/listauto",
+            "/api/prenotazione/salva",
+    };
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
         http.cors().and().csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/auth/**","/api/user/salva").permitAll()
-                //.anyRequest().authenticated()
+                .antMatchers("/api/auth/**").permitAll()
+                .antMatchers(ADMIN).hasRole("ADMIN")
+                .antMatchers(USER).hasRole("USER")
+                .anyRequest().authenticated()
                 .and()
                 .exceptionHandling().authenticationEntryPoint(jwtEntryPoint)
                 .and()
@@ -76,3 +92,5 @@ public class MainSecurity extends WebSecurityConfigurerAdapter {
         http.addFilterBefore(jwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 }
+
+
