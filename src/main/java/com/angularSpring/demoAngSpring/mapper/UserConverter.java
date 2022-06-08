@@ -1,8 +1,8 @@
 package com.angularSpring.demoAngSpring.mapper;
 
 
-import com.angularSpring.demoAngSpring.dto.UserDetailResponse;
-import com.angularSpring.demoAngSpring.dto.UserResponse;
+import com.angularSpring.demoAngSpring.dto.UserDetailDto;
+import com.angularSpring.demoAngSpring.dto.UserDto;
 import com.angularSpring.demoAngSpring.models.User;
 import org.springframework.stereotype.Component;
 
@@ -11,76 +11,51 @@ import java.util.List;
 
 @Component
 public class UserConverter {
-    public UserResponse convertEntityToDto(User user){
-        UserResponse userResponse = new UserResponse();
-        userResponse.setId(user.getId());
-        userResponse.setNome(user.getNome());
-        userResponse.setCognome(user.getCognome());
-        userResponse.setEmail(user.getEmail());
-        userResponse.setRuolo(user.getRuolo());
+
+    public User convertDtoToEntity(UserDto userDto){
+        User user = new User();
+        user.setId(userDto.getId());
+        user.setNome(userDto.getNome());
+        user.setCognome(userDto.getCognome());
+        user.setEmail(userDto.getEmail());
+        user.setRuolo(userDto.getRuolo());
+        return user;
+    }
+
+    public List<UserDto> entityToDto(List<User> users) {
+        List<UserDto> userResponse = new ArrayList<>();
+        for (User user : users) {
+            UserDto response = new UserDto();
+            response.setId(user.getId());
+            response.setNome(user.getNome());
+            response.setCognome(user.getCognome());
+            response.setEmail(user.getEmail());
+            response.setRuolo(user.getRuolo());
+            userResponse.add(response);
+        }
         return userResponse;
     }
 
-    public User convertDtoToEntity(UserResponse userResponse){
+    public UserDetailDto convertEntityToDetailDto(User user){
+        UserDetailDto userDetailDto = new UserDetailDto();
+        userDetailDto.setId(user.getId());
+        userDetailDto.setNome(user.getNome());
+        userDetailDto.setCognome(user.getCognome());
+        userDetailDto.setEmail(user.getEmail());
+        userDetailDto.setPassword(user.getPassword());
+        userDetailDto.setRuolo(user.getRuolo());
+        return userDetailDto;
+    }
+
+    public User convertDetailDtoToEntity(UserDetailDto userDetailDto){
         User user = new User();
-        user.setId(userResponse.getId());
-        user.setNome(userResponse.getNome());
-        user.setCognome(userResponse.getCognome());
-        user.setEmail(userResponse.getEmail());
-        user.setRuolo(userResponse.getRuolo());
+        user.setId(userDetailDto.getId());
+        user.setNome(userDetailDto.getNome());
+        user.setCognome(userDetailDto.getCognome());
+        user.setEmail(userDetailDto.getEmail());
+        user.setPassword(userDetailDto.getPassword());
+        user.setRuolo(userDetailDto.getRuolo());
         return user;
     }
-
-    public List<UserResponse> entityToDto(List<User> users) {
-        List<UserResponse> userResponses = new ArrayList<>();
-        for (User user : users) {
-            UserResponse response = new UserResponse();
-            response.setId(user.getId());
-            response.setNome(user.getNome());
-            response.setCognome(user.getCognome());
-            response.setEmail(user.getEmail());
-            response.setRuolo(user.getRuolo());
-            userResponses.add(response);
-        }
-        return userResponses;
-    }
-
-    public UserDetailResponse convertEntityToDetailDto(User user){
-        UserDetailResponse userDetailResponse = new UserDetailResponse();
-        userDetailResponse.setId(user.getId());
-        userDetailResponse.setNome(user.getNome());
-        userDetailResponse.setCognome(user.getCognome());
-        userDetailResponse.setEmail(user.getEmail());
-        userDetailResponse.setPassword(user.getPassword());
-        userDetailResponse.setRuolo(user.getRuolo());
-        return userDetailResponse;
-    }
-
-    public User convertDetailDtoToEntity(UserDetailResponse userDetailResponse){
-        User user = new User();
-        user.setId(userDetailResponse.getId());
-        user.setNome(userDetailResponse.getNome());
-        user.setCognome(userDetailResponse.getCognome());
-        user.setEmail(userDetailResponse.getEmail());
-        user.setPassword(userDetailResponse.getPassword());
-        user.setRuolo(userDetailResponse.getRuolo());
-        return user;
-    }
-
-    public List<UserDetailResponse> entityToDetailDto(List<User> users) {
-        List<UserDetailResponse> userDetailResponses = new ArrayList<>();
-        for (User user : users) {
-            UserDetailResponse response = new UserDetailResponse();
-            response.setId(user.getId());
-            response.setNome(user.getNome());
-            response.setCognome(user.getCognome());
-            response.setEmail(user.getEmail());
-            response.setPassword(user.getPassword());
-            response.setRuolo(user.getRuolo());
-            userDetailResponses.add(response);
-        }
-        return userDetailResponses;
-    }
-
 
 }

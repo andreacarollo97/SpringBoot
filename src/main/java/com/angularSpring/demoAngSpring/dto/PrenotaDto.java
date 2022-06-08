@@ -2,7 +2,7 @@ package com.angularSpring.demoAngSpring.dto;
 
 import java.time.LocalDate;
 
-public class PrenotazioneRequest {
+public class PrenotaDto {
 
     private Long id;
 

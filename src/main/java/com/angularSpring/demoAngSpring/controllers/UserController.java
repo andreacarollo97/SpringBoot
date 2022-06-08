@@ -1,8 +1,8 @@
 package com.angularSpring.demoAngSpring.controllers;
 
 
-import com.angularSpring.demoAngSpring.dto.UserDetailResponse;
-import com.angularSpring.demoAngSpring.dto.UserResponse;
+import com.angularSpring.demoAngSpring.dto.UserDetailDto;
+import com.angularSpring.demoAngSpring.dto.UserDto;
 import com.angularSpring.demoAngSpring.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,24 +18,29 @@ import java.util.List;
 @RequestMapping("/api/user")
 public class UserController {
 
+
+    private final UserService userService;
+
     @Autowired
-    private UserService userService;
+    public UserController(UserService userService){
+        this.userService = userService;
+    }
 
 
     @GetMapping("/elenco")
-    public ResponseEntity<List<UserResponse>> elencoUser() {
+    public ResponseEntity<List<UserDto>> elencoUser() {
         return new ResponseEntity<>(userService.findAll(), HttpStatus.OK);
     }
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserDetailResponse> ottieniUser(@PathVariable Long id){
+    public ResponseEntity<UserDetailDto> ottieniUser(@PathVariable Long id){
         return new ResponseEntity<>(userService.findById(id),HttpStatus.OK);
     }
 
     @PostMapping("/salva")
-    public ResponseEntity<UserDetailResponse> salvaUser(@RequestBody UserDetailResponse userDetailResponse) {
-        return new ResponseEntity<>(userService.save(userDetailResponse), HttpStatus.CREATED);
+    public ResponseEntity<UserDetailDto> salvaUser(@RequestBody UserDetailDto userDetailDto) {
+        return new ResponseEntity<>(userService.save(userDetailDto), HttpStatus.CREATED);
     }
 
 

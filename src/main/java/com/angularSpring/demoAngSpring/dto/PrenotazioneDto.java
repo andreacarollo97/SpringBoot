@@ -5,7 +5,7 @@ import com.angularSpring.demoAngSpring.models.User;
 
 import java.time.LocalDate;
 
-public class PrenotazioneResponse {
+public class PrenotazioneDto {
 
     private Long id;
 

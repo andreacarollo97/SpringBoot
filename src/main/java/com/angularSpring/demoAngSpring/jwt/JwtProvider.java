@@ -1,9 +1,6 @@
 package com.angularSpring.demoAngSpring.jwt;
-
-
 import com.angularSpring.demoAngSpring.security.UserLogged;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,7 +8,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
-import javax.validation.Valid;
 import java.util.Date;
 
 @Component

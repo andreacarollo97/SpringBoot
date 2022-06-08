@@ -1,7 +1,7 @@
 package com.angularSpring.demoAngSpring.dto;
 
 
-public class AutoResponse {
+public class AutoDto {
 
     private Long id;
 

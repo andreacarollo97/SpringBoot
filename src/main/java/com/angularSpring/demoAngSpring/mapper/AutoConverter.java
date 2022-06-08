@@ -1,6 +1,6 @@
 package com.angularSpring.demoAngSpring.mapper;
 
-import com.angularSpring.demoAngSpring.dto.AutoResponse;
+import com.angularSpring.demoAngSpring.dto.AutoDto;
 import com.angularSpring.demoAngSpring.models.Auto;
 import org.springframework.stereotype.Component;
 
@@ -9,34 +9,34 @@ import java.util.List;
 
 @Component
 public class AutoConverter {
-    public AutoResponse convertEntityToDto(Auto auto){
-        AutoResponse autoResponse = new AutoResponse();
-        autoResponse.setId(auto.getId());
-        autoResponse.setMarca(auto.getMarca());
-        autoResponse.setModello(auto.getModello());
-        autoResponse.setTarga(auto.getTarga());
-        return autoResponse;
+    public AutoDto convertEntityToDto(Auto auto){
+        AutoDto autoDto = new AutoDto();
+        autoDto.setId(auto.getId());
+        autoDto.setMarca(auto.getMarca());
+        autoDto.setModello(auto.getModello());
+        autoDto.setTarga(auto.getTarga());
+        return autoDto;
     }
 
-    public Auto convertDtoToEntity(AutoResponse autoResponse){
+    public Auto convertDtoToEntity(AutoDto autoDto){
         Auto auto = new Auto();
-        auto.setId(autoResponse.getId());
-        auto.setMarca(autoResponse.getMarca());
-        auto.setModello(autoResponse.getModello());
-        auto.setTarga(autoResponse.getTarga());
+        auto.setId(autoDto.getId());
+        auto.setMarca(autoDto.getMarca());
+        auto.setModello(autoDto.getModello());
+        auto.setTarga(autoDto.getTarga());
         return auto;
     }
 
-    public List<AutoResponse> entityToDto(List<Auto> autos) {
-        List<AutoResponse> autoResponses = new ArrayList<>();
+    public List<AutoDto> entityToDto(List<Auto> autos) {
+        List<AutoDto> autoRespons = new ArrayList<>();
         for (Auto auto : autos) {
-            AutoResponse response = new AutoResponse();
+            AutoDto response = new AutoDto();
             response.setId(auto.getId());
             response.setMarca(auto.getMarca());
             response.setModello(auto.getModello());
             response.setTarga(auto.getTarga());
-            autoResponses.add(response);
+            autoRespons.add(response);
         }
-        return autoResponses;
+        return autoRespons;
     }
 }

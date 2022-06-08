@@ -3,10 +3,7 @@ package com.angularSpring.demoAngSpring.controllers;
 import com.angularSpring.demoAngSpring.dto.LoginDto;
 import com.angularSpring.demoAngSpring.dto.TokenDto;
 import com.angularSpring.demoAngSpring.jwt.JwtProvider;
-import com.angularSpring.demoAngSpring.mapper.UserConverter;
-import com.angularSpring.demoAngSpring.models.User;
 import com.angularSpring.demoAngSpring.security.UserLogged;
-import com.angularSpring.demoAngSpring.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,18 +20,14 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin
 public class AuthController {
 
+    private final AuthenticationManager authenticationManager;
+    private final JwtProvider jwtProvider;
 
     @Autowired
-    private AuthenticationManager authenticationManager;
-
-    @Autowired
-    private UserService userService;
-
-    @Autowired
-    private UserConverter userConverter;
-
-    @Autowired
-    JwtProvider jwtProvider;
+    public AuthController(AuthenticationManager authenticationManager, JwtProvider jwtProvider){
+        this.authenticationManager = authenticationManager;
+        this.jwtProvider = jwtProvider;
+    }
 
 
     @PostMapping("/login")

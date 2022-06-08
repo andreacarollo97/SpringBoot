@@ -1,8 +1,7 @@
 package com.angularSpring.demoAngSpring.services;
 
-import com.angularSpring.demoAngSpring.dto.AutoResponse;
-import com.angularSpring.demoAngSpring.dto.PrenotazioneRequest;
-import com.angularSpring.demoAngSpring.dto.PrenotazioneResponse;
+import com.angularSpring.demoAngSpring.dto.PrenotaDto;
+import com.angularSpring.demoAngSpring.dto.PrenotazioneDto;
 import com.angularSpring.demoAngSpring.mapper.PrenotazioneConverter;
 import com.angularSpring.demoAngSpring.models.Auto;
 import com.angularSpring.demoAngSpring.models.User;
@@ -20,23 +19,25 @@ import java.util.List;
 @Service
 public class PrenotazioneServiceImpl implements PrenotazioneService {
 
-    @Autowired
-    private PrenotazioneRepository prenotazioneRepository;
-    @Autowired
-    private PrenotazioneConverter prenotazioneConverter;
 
-    @Autowired
-    private AutoRepository autoRepository;
+    private final PrenotazioneRepository prenotazioneRepository;
+    private final PrenotazioneConverter prenotazioneConverter;
+    private final AutoRepository autoRepository;
+    private final UserRepository userRepository;
 
-    @Autowired
-    private UserRepository userRepository;
+    public PrenotazioneServiceImpl(PrenotazioneRepository prenotazioneRepository, PrenotazioneConverter prenotazioneConverter, AutoRepository autoRepository, UserRepository userRepository){
+        this.prenotazioneRepository = prenotazioneRepository;
+        this.prenotazioneConverter = prenotazioneConverter;
+        this.autoRepository = autoRepository;
+        this.userRepository = userRepository;
+    }
 
 
     @Override
-    public void save(PrenotazioneRequest prenotazioneRequest) {
-        Auto auto = autoRepository.getAutoById(prenotazioneRequest.getAutoId());
-        User user = userRepository.getUserById(prenotazioneRequest.getUserId());
-        Prenotazione prenotazione = prenotazioneConverter.convertRequestToEntity(prenotazioneRequest,auto,user);
+    public void save(PrenotaDto prenotaDto) {
+        Auto auto = autoRepository.getAutoById(prenotaDto.getAutoId());
+        User user = userRepository.getUserById(prenotaDto.getUserId());
+        Prenotazione prenotazione = prenotazioneConverter.convertRequestToEntity(prenotaDto,auto,user);
         prenotazioneRepository.save(prenotazione);
     }
 
@@ -50,19 +51,19 @@ public class PrenotazioneServiceImpl implements PrenotazioneService {
 
 
     @Override
-    public PrenotazioneResponse findById(Long id) {
+    public PrenotazioneDto findById(Long id) {
         Prenotazione prenotazione = prenotazioneRepository.getPrenotazioneById(id);
         return prenotazioneConverter.convertEntityToDto(prenotazione);
     }
 
     @Override
-    public List<PrenotazioneResponse> findAll() {
+    public List<PrenotazioneDto> findAll() {
         List<Prenotazione> prenotazioni = prenotazioneRepository.getAllBy();
         return prenotazioneConverter.entityToDto(prenotazioni);
     }
 
     @Override
-    public List<PrenotazioneResponse> findAllbyUser(User user) {
+    public List<PrenotazioneDto> findAllbyUser(User user) {
         List<Prenotazione> prenotazioni = prenotazioneRepository.getAllByUser(user);
         return prenotazioneConverter.entityToDto(prenotazioni);
     }

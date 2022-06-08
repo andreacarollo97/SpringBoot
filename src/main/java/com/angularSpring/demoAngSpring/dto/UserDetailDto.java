@@ -1,6 +1,6 @@
 package com.angularSpring.demoAngSpring.dto;
 
-public class UserDetailResponse extends UserResponse {
+public class UserDetailDto extends UserDto {
 
     private String password;
 

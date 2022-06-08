@@ -1,14 +1,10 @@
 package com.angularSpring.demoAngSpring.controllers;
 
 
-
-import com.angularSpring.demoAngSpring.dto.PrenotazioneRequest;
-import com.angularSpring.demoAngSpring.dto.PrenotazioneResponse;
+import com.angularSpring.demoAngSpring.dto.PrenotaDto;
+import com.angularSpring.demoAngSpring.dto.PrenotazioneDto;
 import com.angularSpring.demoAngSpring.mapper.UserConverter;
 import com.angularSpring.demoAngSpring.models.Auto;
-
-import com.angularSpring.demoAngSpring.models.User;
-import com.angularSpring.demoAngSpring.services.AutoService;
 import com.angularSpring.demoAngSpring.services.PrenotazioneService;
 import com.angularSpring.demoAngSpring.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +12,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.nio.file.LinkOption;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -27,22 +22,26 @@ import java.util.List;
 public class PrenotazioneController {
 
 
-    @Autowired
-    private PrenotazioneService prenotazioneService;
+    private final PrenotazioneService prenotazioneService;
+    private final UserService userService;
+    private final UserConverter userConverter;
 
     @Autowired
-    private UserService userService;
+    public PrenotazioneController(PrenotazioneService prenotazioneService, UserService userService, UserConverter userConverter){
+        this.prenotazioneService = prenotazioneService;
+        this.userService = userService;
+        this.userConverter = userConverter;
+    }
 
-    @Autowired
-    private UserConverter userConverter;
+
 
     @GetMapping("/elenco")
-    public ResponseEntity<List<PrenotazioneResponse>> elencoPrenotazioni() {
+    public ResponseEntity<List<PrenotazioneDto>> elencoPrenotazioni() {
         return new ResponseEntity<>(prenotazioneService.findAll(), HttpStatus.OK);
     }
 
     @GetMapping("/prenotazioni/{userId}")
-    public ResponseEntity<List<PrenotazioneResponse>> elencoMiePrenotazioni(@PathVariable Long userId) {
+    public ResponseEntity<List<PrenotazioneDto>> elencoMiePrenotazioni(@PathVariable Long userId) {
         return new ResponseEntity<>(
                 prenotazioneService.findAllbyUser(
                         userConverter.convertDtoToEntity(userService.findById(userId))),
@@ -58,19 +57,19 @@ public class PrenotazioneController {
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<PrenotazioneResponse> ottieniPrenotazione(@PathVariable Long id){
+    public ResponseEntity<PrenotazioneDto> ottieniPrenotazione(@PathVariable Long id){
         return new ResponseEntity<>(prenotazioneService.findById(id),HttpStatus.OK);
     }
 
     @PostMapping("/salva")
-    public ResponseEntity<?> salvaPrenotazione(@RequestBody PrenotazioneRequest prenotazioneRequest) {
-        prenotazioneService.save(prenotazioneRequest);
+    public ResponseEntity<?> salvaPrenotazione(@RequestBody PrenotaDto prenotaDto) {
+        prenotazioneService.save(prenotaDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
    @PutMapping("/edit/{id}")
-   public ResponseEntity<PrenotazioneResponse> editPrenotazione(@RequestBody PrenotazioneRequest prenotazioneRequest) {
-       prenotazioneService.save(prenotazioneRequest);
+   public ResponseEntity<PrenotazioneDto> editPrenotazione(@RequestBody PrenotaDto prenotaDto) {
+       prenotazioneService.save(prenotaDto);
        return new ResponseEntity<>(HttpStatus.OK);
    }
 

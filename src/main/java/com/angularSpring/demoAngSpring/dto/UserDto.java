@@ -1,7 +1,7 @@
 package com.angularSpring.demoAngSpring.dto;
 
 
-public class UserResponse {
+public class UserDto {
 
     private Long id;
 

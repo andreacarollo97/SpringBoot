@@ -1,7 +1,7 @@
 package com.angularSpring.demoAngSpring.services;
 
 
-import com.angularSpring.demoAngSpring.dto.AutoResponse;
+import com.angularSpring.demoAngSpring.dto.AutoDto;
 import com.angularSpring.demoAngSpring.mapper.AutoConverter;
 import com.angularSpring.demoAngSpring.repository.AutoRepository;
 import com.angularSpring.demoAngSpring.models.Auto;
@@ -14,28 +14,32 @@ import java.util.List;
 @Service
 public class AutoServiceImpl implements AutoService {
 
-    @Autowired
-    private AutoRepository autoRepository;
+
+    private final AutoRepository autoRepository;
+    private final AutoConverter autoConverter;
 
     @Autowired
-    private AutoConverter autoConverter;
+    public AutoServiceImpl(AutoRepository autoRepository,AutoConverter autoConverter){
+        this.autoConverter = autoConverter;
+        this.autoRepository = autoRepository;
+    }
 
 
     @Override
-    public AutoResponse save(AutoResponse autoResponse) {
-        Auto auto = autoConverter.convertDtoToEntity(autoResponse);
+    public AutoDto save(AutoDto autoDto) {
+        Auto auto = autoConverter.convertDtoToEntity(autoDto);
         auto = autoRepository.save(auto);
         return autoConverter.convertEntityToDto(auto);
     }
 
     @Override
-    public AutoResponse findById(Long id) {
+    public AutoDto findById(Long id) {
         Auto auto = autoRepository.getAutoById(id);
         return autoConverter.convertEntityToDto(auto);
     }
 
     @Override
-    public List<AutoResponse> findAll() {
+    public List<AutoDto> findAll() {
         List<Auto> autos = autoRepository.getAllBy();
         return autoConverter.entityToDto(autos);
     }

@@ -4,8 +4,8 @@ package com.angularSpring.demoAngSpring.services;
 
 
 
-import com.angularSpring.demoAngSpring.dto.PrenotazioneRequest;
-import com.angularSpring.demoAngSpring.dto.PrenotazioneResponse;
+import com.angularSpring.demoAngSpring.dto.PrenotaDto;
+import com.angularSpring.demoAngSpring.dto.PrenotazioneDto;
 import com.angularSpring.demoAngSpring.models.Auto;
 import com.angularSpring.demoAngSpring.models.User;
 
@@ -14,17 +14,17 @@ import java.util.List;
 
 public interface PrenotazioneService {
 
-    void save(PrenotazioneRequest prenotazioneRequest);
+    void save(PrenotaDto prenotaDto);
 
     void validate(Long id);
 
-    PrenotazioneResponse findById(Long id);
+    PrenotazioneDto findById(Long id);
 
-    List<PrenotazioneResponse> findAll();
+    List<PrenotazioneDto> findAll();
 
     void delete(Long id);
 
     List<Auto> autoDisponibili(LocalDate dataInizio, LocalDate dataFine);
 
-    List<PrenotazioneResponse> findAllbyUser(User user);
+    List<PrenotazioneDto> findAllbyUser(User user);
 }

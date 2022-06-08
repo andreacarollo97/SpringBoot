@@ -1,7 +1,7 @@
 package com.angularSpring.demoAngSpring.services;
 
-import com.angularSpring.demoAngSpring.dto.UserDetailResponse;
-import com.angularSpring.demoAngSpring.dto.UserResponse;
+import com.angularSpring.demoAngSpring.dto.UserDetailDto;
+import com.angularSpring.demoAngSpring.dto.UserDto;
 import com.angularSpring.demoAngSpring.mapper.UserConverter;
 import com.angularSpring.demoAngSpring.models.User;
 import com.angularSpring.demoAngSpring.repository.UserRepository;
@@ -16,37 +16,40 @@ import java.util.List;
 @Transactional
 public class UserServiceImpl implements UserService {
 
-    @Autowired
     private UserConverter userConverter;
-    @Autowired
     private UserRepository userRepository;
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    public UserServiceImpl(UserConverter userConverter, UserRepository userRepository, PasswordEncoder passwordEncoder){
+        this.userConverter = userConverter;
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
 
 
     @Override
-    public UserDetailResponse save(UserDetailResponse userDetailResponse) {
-        User user = userConverter.convertDetailDtoToEntity(userDetailResponse);
+    public UserDetailDto save(UserDetailDto userDetailDto) {
+        User user = userConverter.convertDetailDtoToEntity(userDetailDto);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user = userRepository.save(user);
         return userConverter.convertEntityToDetailDto(user);
     }
 
     @Override
-    public UserDetailResponse findById(Long id) {
+    public UserDetailDto findById(Long id) {
         User user = userRepository.getUserById(id);
         return userConverter.convertEntityToDetailDto(user);
     }
 
     @Override
-    public UserDetailResponse findByEmail(String email) {
+    public UserDetailDto findByEmail(String email) {
         User user = userRepository.getUserByEmail(email);
         return userConverter.convertEntityToDetailDto(user);
     }
 
     @Override
-    public List<UserResponse> findAll() {
+    public List<UserDto> findAll() {
         List<User> users = userRepository.getAllBy();
         return userConverter.entityToDto(users);
     }
