@@ -5,6 +5,8 @@ import com.angularSpring.demoAngSpring.dto.TokenDto;
 import com.angularSpring.demoAngSpring.jwt.JwtProvider;
 import com.angularSpring.demoAngSpring.security.UserLogged;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -13,21 +15,28 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
+
+import java.util.Arrays;
+import java.util.Collections;
 
 
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin
 public class AuthController {
 
     private final AuthenticationManager authenticationManager;
     private final JwtProvider jwtProvider;
 
-    @Autowired
     public AuthController(AuthenticationManager authenticationManager, JwtProvider jwtProvider){
         this.authenticationManager = authenticationManager;
         this.jwtProvider = jwtProvider;
     }
+
+
 
 
     @PostMapping("/login")

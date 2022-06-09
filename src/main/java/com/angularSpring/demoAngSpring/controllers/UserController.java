@@ -13,7 +13,7 @@ import java.util.List;
 
 
 
-@CrossOrigin(origins = {"*"})
+
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
@@ -21,7 +21,6 @@ public class UserController {
 
     private final UserService userService;
 
-    @Autowired
     public UserController(UserService userService){
         this.userService = userService;
     }

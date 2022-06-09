@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 
-@CrossOrigin(origins = {"*"})
+
 @RestController
 @RequestMapping("/api/auto")
 public class AutoController {
@@ -19,7 +19,7 @@ public class AutoController {
 
     private final AutoService autoService;
 
-    @Autowired
+
     public AutoController(AutoService autoService){
         this.autoService = autoService;
     }

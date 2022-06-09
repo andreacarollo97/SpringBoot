@@ -16,7 +16,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 
-@CrossOrigin(origins = {"*"})
+
 @RestController
 @RequestMapping("/api/prenotazione")
 public class PrenotazioneController {
@@ -26,7 +26,7 @@ public class PrenotazioneController {
     private final UserService userService;
     private final UserConverter userConverter;
 
-    @Autowired
+
     public PrenotazioneController(PrenotazioneService prenotazioneService, UserService userService, UserConverter userConverter){
         this.prenotazioneService = prenotazioneService;
         this.userService = userService;
