@@ -37,7 +37,7 @@ public class PrenotazioneServiceImpl implements PrenotazioneService {
     public void save(PrenotaDto prenotaDto) {
         Auto auto = autoRepository.getAutoById(prenotaDto.getAutoId());
         User user = userRepository.getUserById(prenotaDto.getUserId());
-        Prenotazione prenotazione = prenotazioneConverter.convertRequestToEntity(prenotaDto,auto,user);
+        Prenotazione prenotazione = prenotazioneConverter.convertDtoToEntity(prenotaDto,auto,user);
         prenotazioneRepository.save(prenotazione);
     }
 
@@ -59,13 +59,13 @@ public class PrenotazioneServiceImpl implements PrenotazioneService {
     @Override
     public List<PrenotazioneDto> findAll() {
         List<Prenotazione> prenotazioni = prenotazioneRepository.getAllBy();
-        return prenotazioneConverter.entityToDto(prenotazioni);
+        return prenotazioneConverter.convertListOfEntityToDto(prenotazioni);
     }
 
     @Override
     public List<PrenotazioneDto> findAllbyUser(User user) {
         List<Prenotazione> prenotazioni = prenotazioneRepository.getAllByUser(user);
-        return prenotazioneConverter.entityToDto(prenotazioni);
+        return prenotazioneConverter.convertListOfEntityToDto(prenotazioni);
     }
 
     @Override
@@ -83,12 +83,10 @@ public class PrenotazioneServiceImpl implements PrenotazioneService {
             idAutoPrenotate.add(autoId);
         }
         if (idAutoPrenotate.size() == 0){
-            List<Auto> autos = autoRepository.findAll();
-            return autos;
+            return autoRepository.findAll();
         }
         else {
-            List<Auto> autoDisponibili = autoRepository.getAutoByIdNotIn(idAutoPrenotate);
-            return autoDisponibili;
+            return autoRepository.getAutoByIdNotIn(idAutoPrenotate);
         }
     }
 

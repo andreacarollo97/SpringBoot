@@ -41,7 +41,7 @@ public class AutoServiceImpl implements AutoService {
     @Override
     public List<AutoDto> findAll() {
         List<Auto> autos = autoRepository.getAllBy();
-        return autoConverter.entityToDto(autos);
+        return autoConverter.convertListOfEntityToDto(autos);
     }
 
     @Override

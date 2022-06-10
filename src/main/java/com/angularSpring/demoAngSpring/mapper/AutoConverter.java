@@ -1,7 +1,9 @@
 package com.angularSpring.demoAngSpring.mapper;
 
 import com.angularSpring.demoAngSpring.dto.AutoDto;
+import com.angularSpring.demoAngSpring.dto.PrenotazioneDto;
 import com.angularSpring.demoAngSpring.models.Auto;
+import com.angularSpring.demoAngSpring.models.Prenotazione;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -27,16 +29,13 @@ public class AutoConverter {
         return auto;
     }
 
-    public List<AutoDto> entityToDto(List<Auto> autos) {
-        List<AutoDto> autoRespons = new ArrayList<>();
+    public List<AutoDto> convertListOfEntityToDto(List<Auto> autos) {
+        List<AutoDto> autoResponse = new ArrayList<>();
         for (Auto auto : autos) {
-            AutoDto response = new AutoDto();
-            response.setId(auto.getId());
-            response.setMarca(auto.getMarca());
-            response.setModello(auto.getModello());
-            response.setTarga(auto.getTarga());
-            autoRespons.add(response);
+            autoResponse.add(convertEntityToDto(auto));
         }
-        return autoRespons;
+        return autoResponse;
     }
+
+
 }

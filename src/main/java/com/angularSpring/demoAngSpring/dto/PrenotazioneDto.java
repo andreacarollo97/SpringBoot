@@ -2,6 +2,7 @@ package com.angularSpring.demoAngSpring.dto;
 
 import com.angularSpring.demoAngSpring.models.Auto;
 import com.angularSpring.demoAngSpring.models.User;
+import com.angularSpring.demoAngSpring.repository.AutoRepository;
 
 import java.time.LocalDate;
 
@@ -15,24 +16,24 @@ public class PrenotazioneDto {
 
     private int stato;
 
-    private Auto auto;
+    private AutoDto autoDto;
 
-    private User user;
+    private UserDto userDto;
 
-    public Auto getAuto() {
-        return auto;
+    public AutoDto getAutoDto() {
+        return autoDto;
     }
 
-    public void setAuto(Auto auto) {
-        this.auto = auto;
+    public void setAutoDto(AutoDto autoDto) {
+        this.autoDto = autoDto;
     }
 
-    public User getUser() {
-        return user;
+    public UserDto getUserDto() {
+        return userDto;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserDto(UserDto userDto) {
+        this.userDto = userDto;
     }
 
     public Long getId() {
@@ -67,7 +68,6 @@ public class PrenotazioneDto {
     public void setStato(int stato) {
         this.stato = stato;
     }
-
 
 
 
