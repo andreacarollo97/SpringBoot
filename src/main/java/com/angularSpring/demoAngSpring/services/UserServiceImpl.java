@@ -16,11 +16,11 @@ import java.util.List;
 @Transactional
 public class UserServiceImpl implements UserService {
 
-    private UserConverter userConverter;
-    private UserRepository userRepository;
-    private PasswordEncoder passwordEncoder;
+    private final UserConverter userConverter;
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    @Autowired
+
     public UserServiceImpl(UserConverter userConverter, UserRepository userRepository, PasswordEncoder passwordEncoder){
         this.userConverter = userConverter;
         this.userRepository = userRepository;
@@ -42,11 +42,6 @@ public class UserServiceImpl implements UserService {
         return userConverter.convertEntityToDetailDto(user);
     }
 
-    @Override
-    public UserDetailDto findByEmail(String email) {
-        User user = userRepository.getUserByEmail(email);
-        return userConverter.convertEntityToDetailDto(user);
-    }
 
     @Override
     public List<UserDto> findAll() {

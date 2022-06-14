@@ -18,7 +18,6 @@ public class AutoServiceImpl implements AutoService {
     private final AutoRepository autoRepository;
     private final AutoConverter autoConverter;
 
-    @Autowired
     public AutoServiceImpl(AutoRepository autoRepository,AutoConverter autoConverter){
         this.autoConverter = autoConverter;
         this.autoRepository = autoRepository;

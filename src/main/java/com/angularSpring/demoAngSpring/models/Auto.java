@@ -20,9 +20,16 @@ public class Auto {
     @Column
     private String targa;
 
+    @ManyToOne()
+    @JoinColumn(name = "parco_auto_id")
+    private ParcoAuto parcoAuto;
+
 
     @OneToMany(mappedBy = "auto", cascade = CascadeType.ALL)
     private List<Prenotazione> prenotazioni;
+
+    public Auto() {
+    }
 
     public Long getId() {
         return id;
@@ -55,6 +62,5 @@ public class Auto {
     public void setTarga(String targa) {
         this.targa = targa;
     }
-
 
 }
