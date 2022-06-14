@@ -13,4 +13,10 @@ public interface AutoRepository extends JpaRepository<Auto, Long> {
     List<Auto> getAllBy();
     Auto getAutoById(Long autoId);
     List<Auto> getAllByParcoAutoId(Long id);
+
+    List<Auto> getAutoByParcoAutoIsNull();
+    Auto getAutoByParcoAutoId(Long id);
+
+
+
 }

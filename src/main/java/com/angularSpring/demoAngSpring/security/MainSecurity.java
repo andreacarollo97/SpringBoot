@@ -84,12 +84,20 @@ public class MainSecurity extends WebSecurityConfigurerAdapter {
             "/api/auto/elenco",
     };
 
+    private static final String[] SUPER = {
+            "/api/parcoAuto/listauto",
+            "/api/prenotazione/salva",
+            "/api/prenotazione/prenotazioni/**",
+            "/api/auto/elenco",
+    };
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-/*
+
         http.cors().and().csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/api/auth/**").permitAll()
+                .antMatchers(SUPER).hasRole("SUPER")
                 .antMatchers(ADMIN).hasRole("ADMIN")
                 .antMatchers(USER).hasRole("USER")
                 .anyRequest().authenticated()
@@ -99,7 +107,6 @@ public class MainSecurity extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilterBefore(jwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 
- */
     }
 }
 

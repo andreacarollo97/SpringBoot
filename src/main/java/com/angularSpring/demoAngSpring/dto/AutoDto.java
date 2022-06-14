@@ -1,6 +1,8 @@
 package com.angularSpring.demoAngSpring.dto;
 
 
+import com.angularSpring.demoAngSpring.models.ParcoAuto;
+
 public class AutoDto {
 
     private Long id;
@@ -11,6 +13,15 @@ public class AutoDto {
 
     private String targa;
 
+    private ParcoAuto parcoAuto;
+
+    public ParcoAuto getParcoAuto() {
+        return parcoAuto;
+    }
+
+    public void setParcoAuto(ParcoAuto parcoAuto) {
+        this.parcoAuto = parcoAuto;
+    }
 
     public Long getId() {
         return id;

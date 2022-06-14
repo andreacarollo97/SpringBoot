@@ -63,4 +63,11 @@ public class Auto {
         this.targa = targa;
     }
 
+    public ParcoAuto getParcoAuto() {
+        return parcoAuto;
+    }
+
+    public void setParcoAuto(ParcoAuto parcoAuto) {
+        this.parcoAuto = parcoAuto;
+    }
 }

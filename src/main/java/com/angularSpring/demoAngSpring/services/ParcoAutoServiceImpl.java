@@ -18,7 +18,6 @@ public class ParcoAutoServiceImpl implements ParcoAutoService {
     private final ParcoAutoConverter parcoAutoConverter;
     private final ParcoAutoRepository parcoAutoRepository;
     private final AutoRepository autoRepository;
-
     private final AutoConverter autoConverter;
 
 
@@ -37,7 +36,18 @@ public class ParcoAutoServiceImpl implements ParcoAutoService {
     }
 
     @Override
-    public void associate(Long idParcoAuto) {
+    public void associate(Long idParcoAuto, Long idAuto) {
+        Auto auto = autoRepository.getAutoById(idAuto);
+        auto.setParcoAuto(parcoAutoRepository.getParcoAutoById(idParcoAuto));
+        autoRepository.save(auto);
+    }
+
+
+
+
+    @Override
+    public List<AutoDto> autoLibere() {
+      return autoConverter.convertListOfEntityToDto(autoRepository.getAutoByParcoAutoIsNull());
     }
 
     @Override

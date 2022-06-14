@@ -26,6 +26,11 @@ public class ParcoAutoController {
         return new ResponseEntity<>(parcoAutoService.findAll(), HttpStatus.OK);
     }
 
+    @GetMapping("/elencoAutoLibere")
+    public ResponseEntity<List<AutoDto>> elencoAutoLibere() {
+        return new ResponseEntity<>(parcoAutoService.autoLibere(), HttpStatus.OK);
+    }
+
     @GetMapping("/listaAutoParco/{id}")
     public ResponseEntity<List<AutoDto>> listaAutoParco(@PathVariable Long id) {
         return new ResponseEntity<>(parcoAutoService.listAutoByIdParco(id), HttpStatus.OK);
@@ -42,6 +47,12 @@ public class ParcoAutoController {
     public ResponseEntity<?> salvaParco(@RequestBody ParcoAutoDto parcoAutoDto) {
         parcoAutoService.save(parcoAutoDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @PostMapping("/associate")
+    public ResponseEntity<?> validatePrenotazione(@RequestParam("idAuto") Long idAuto, @RequestParam("idParcoAuto") Long idParcoAuto) {
+        parcoAutoService.associate(idParcoAuto,idAuto);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 
