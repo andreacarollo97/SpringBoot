@@ -6,10 +6,12 @@ import com.angularSpring.demoAngSpring.mapper.AutoConverter;
 import com.angularSpring.demoAngSpring.mapper.ParcoAutoConverter;
 import com.angularSpring.demoAngSpring.models.Auto;
 import com.angularSpring.demoAngSpring.models.ParcoAuto;
+import com.angularSpring.demoAngSpring.models.Prenotazione;
 import com.angularSpring.demoAngSpring.repository.AutoRepository;
 import com.angularSpring.demoAngSpring.repository.ParcoAutoRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -42,6 +44,12 @@ public class ParcoAutoServiceImpl implements ParcoAutoService {
         autoRepository.save(auto);
     }
 
+    @Override
+    public void multiAssociate(List<Long> idAuto, Long idParco) {
+        for (Long id : idAuto) {
+                associate(idParco, id);
+        }
+    }
 
 
 

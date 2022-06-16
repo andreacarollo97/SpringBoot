@@ -2,8 +2,6 @@ package com.angularSpring.demoAngSpring.services;
 
 import com.angularSpring.demoAngSpring.dto.AutoDto;
 import com.angularSpring.demoAngSpring.dto.ParcoAutoDto;
-import com.angularSpring.demoAngSpring.models.Auto;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -15,6 +13,9 @@ public interface ParcoAutoService {
     List<AutoDto> autoLibere();
 
     void associate(Long parcoId, Long autoId);
+
+    void multiAssociate(List<Long> idAuto, Long idParco);
+
 
     ParcoAutoDto findById(Long id);
 

@@ -85,10 +85,8 @@ public class MainSecurity extends WebSecurityConfigurerAdapter {
     };
 
     private static final String[] SUPER = {
-            "/api/parcoAuto/listauto",
-            "/api/prenotazione/salva",
-            "/api/prenotazione/prenotazioni/**",
-            "/api/auto/elenco",
+            "/api/parcoAuto/**",
+            "/api/user/**"
     };
 
     @Override

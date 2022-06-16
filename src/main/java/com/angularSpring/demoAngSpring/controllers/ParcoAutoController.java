@@ -50,8 +50,26 @@ public class ParcoAutoController {
     }
 
     @PostMapping("/associate")
-    public ResponseEntity<?> validatePrenotazione(@RequestParam("idAuto") Long idAuto, @RequestParam("idParcoAuto") Long idParcoAuto) {
+    public ResponseEntity<?> associaAuto(@RequestParam("idAuto") Long idAuto, @RequestParam("idParcoAuto") Long idParcoAuto) {
         parcoAutoService.associate(idParcoAuto,idAuto);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping("/multiAssociate")
+    public ResponseEntity<?> multiAssociaAuto(@RequestParam("listIdAuto") List<Long> idAuto, @RequestParam("idParcoAuto") Long idParcoAuto) {
+        parcoAutoService.multiAssociate(idAuto,idParcoAuto);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping("/transfer")
+    public ResponseEntity<?> trasferisciAuto(@RequestParam("idAuto") Long idAuto, @RequestParam("idParcoAuto") Long idParcoAuto) {
+        parcoAutoService.associate(idParcoAuto,idAuto);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping("/multiTransfer")
+    public ResponseEntity<?> multiTrasferimentoAuto(@RequestParam("listIdAuto") List<Long> idAuto, @RequestParam("idParcoAuto") Long idParcoAuto) {
+        parcoAutoService.multiAssociate(idAuto,idParcoAuto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
