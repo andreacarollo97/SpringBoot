@@ -67,7 +67,6 @@ public class MainSecurity extends WebSecurityConfigurerAdapter {
 
 
     private static final String[] ADMIN = {
-            "/api/user/**",
             "/api/prenotazione/edit/**",
             "/api/prenotazione/elimina/**",
             "/api/prenotazione/detail/**",
@@ -86,8 +85,13 @@ public class MainSecurity extends WebSecurityConfigurerAdapter {
 
     private static final String[] SUPER = {
             "/api/parcoAuto/**",
+    };
+
+    private static final String[] SUPER_ADMIN= {
             "/api/user/**"
     };
+
+  //toDo: studiare hasRole vs hasAuthority
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -95,16 +99,16 @@ public class MainSecurity extends WebSecurityConfigurerAdapter {
         http.cors().and().csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/api/auth/**").permitAll()
-                .antMatchers(SUPER).hasRole("SUPER")
-                .antMatchers(ADMIN).hasRole("ADMIN")
-                .antMatchers(USER).hasRole("USER")
+                .antMatchers(SUPER_ADMIN).hasAnyAuthority("SUPER","ADMIN")
+                .antMatchers(SUPER).hasAuthority("SUPER")
+                .antMatchers(ADMIN).hasAuthority("ADMIN")
+                .antMatchers(USER).hasAuthority("USER")
                 .anyRequest().authenticated()
                 .and()
                 .exceptionHandling().authenticationEntryPoint(jwtEntryPoint)
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilterBefore(jwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
-
     }
 }
 
