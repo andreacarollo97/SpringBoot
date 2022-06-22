@@ -37,7 +37,7 @@ public class ParcoAutoController {
     }
 
 
-    @GetMapping("/{id}")
+    @GetMapping("/detail/{id}")
     public ResponseEntity<ParcoAutoDto> ottieniParco(@PathVariable Long id){
         return new ResponseEntity<>(parcoAutoService.findById(id),HttpStatus.OK);
     }
@@ -74,11 +74,11 @@ public class ParcoAutoController {
     }
 
 
-    @PutMapping("/edit/{id}")
+    @PutMapping("/edit")
     public ResponseEntity<ParcoAutoDto> editParco(@RequestBody ParcoAutoDto parcoAutoDto) {
-        parcoAutoService.save(parcoAutoDto);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(parcoAutoService.save(parcoAutoDto),HttpStatus.OK);
     }
+
 
 
     @DeleteMapping("/elimina/{id}")

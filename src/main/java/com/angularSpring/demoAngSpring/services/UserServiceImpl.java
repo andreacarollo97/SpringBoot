@@ -48,13 +48,11 @@ public class UserServiceImpl implements UserService {
         return userConverter.convertEntityToDetailDto(user);
     }
 
-
     @Override
     public List<UserDto> findAll() {
         List<User> users = userRepository.getAllBy();
         return userConverter.entityToDto(users);
     }
-
     @Override
     public void delete(Long id) {
         UserLogged userLogged = (UserLogged) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

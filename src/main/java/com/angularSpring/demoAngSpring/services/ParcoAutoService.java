@@ -8,14 +8,13 @@ import java.util.List;
 
 public interface ParcoAutoService {
 
-    void save(ParcoAutoDto parcoAutoDto);
+    ParcoAutoDto save(ParcoAutoDto parcoAutoDto);
 
     List<AutoDto> autoLibere();
 
     void associate(Long parcoId, Long autoId);
 
     void multiAssociate(List<Long> idAuto, Long idParco);
-
 
     ParcoAutoDto findById(Long id);
 

@@ -1,8 +1,9 @@
 package com.angularSpring.demoAngSpring.mapper;
 
 import com.angularSpring.demoAngSpring.dto.AutoDto;
+import com.angularSpring.demoAngSpring.dto.EditAutoDto;
 import com.angularSpring.demoAngSpring.models.Auto;
-import com.angularSpring.demoAngSpring.repository.AutoRepository;
+import com.angularSpring.demoAngSpring.repository.ParcoAutoRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -11,10 +12,11 @@ import java.util.List;
 @Component
 public class AutoConverter {
 
-    private final AutoRepository autoRepository;
+    private final ParcoAutoRepository parcoAutoRepository;
 
-    public AutoConverter(AutoRepository autoRepository) {
-        this.autoRepository = autoRepository;
+    public AutoConverter(ParcoAutoRepository parcoAutoRepository) {
+        this.parcoAutoRepository = parcoAutoRepository;
+
     }
 
     public AutoDto convertEntityToDto(Auto auto){
@@ -23,7 +25,12 @@ public class AutoConverter {
         autoDto.setMarca(auto.getMarca());
         autoDto.setModello(auto.getModello());
         autoDto.setTarga(auto.getTarga());
-        autoDto.setParcoAuto(auto.getParcoAuto());
+        if(auto.getParcoAuto() == null){
+            autoDto.setNomeParcoAuto("Non Assegnato!");
+        }
+        else {
+            autoDto.setNomeParcoAuto(auto.getParcoAuto().getNome());
+        }
         return autoDto;
     }
 
@@ -33,7 +40,7 @@ public class AutoConverter {
         auto.setMarca(autoDto.getMarca());
         auto.setModello(autoDto.getModello());
         auto.setTarga(autoDto.getTarga());
-        auto.setParcoAuto(autoDto.getParcoAuto());
+        auto.setParcoAuto(parcoAutoRepository.getParcoAutoByNome(autoDto.getNomeParcoAuto()));
         return auto;
     }
 
@@ -45,5 +52,17 @@ public class AutoConverter {
         return autoResponse;
     }
 
+    public void updateAutoByEditAuto(Auto auto,EditAutoDto editAutoDto){
+        auto.setMarca(editAutoDto.getMarca());
+        auto.setTarga(editAutoDto.getTarga());
+        auto.setModello(editAutoDto.getModello());
+    }
 
+    public Auto convertEditAutoToAuto(EditAutoDto editAutoDto){
+        Auto auto = new Auto();
+        auto.setMarca(editAutoDto.getMarca());
+        auto.setModello(editAutoDto.getModello());
+        auto.setTarga(editAutoDto.getTarga());
+        return auto;
+    }
 }

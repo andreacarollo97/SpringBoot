@@ -12,7 +12,7 @@ public class ParcoAuto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private Long id;
-    @Column
+    @Column(unique = true)
     private String nome;
     @Column
     private String cittadina;

@@ -6,12 +6,10 @@ import com.angularSpring.demoAngSpring.mapper.AutoConverter;
 import com.angularSpring.demoAngSpring.mapper.ParcoAutoConverter;
 import com.angularSpring.demoAngSpring.models.Auto;
 import com.angularSpring.demoAngSpring.models.ParcoAuto;
-import com.angularSpring.demoAngSpring.models.Prenotazione;
 import com.angularSpring.demoAngSpring.repository.AutoRepository;
 import com.angularSpring.demoAngSpring.repository.ParcoAutoRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -31,11 +29,13 @@ public class ParcoAutoServiceImpl implements ParcoAutoService {
     }
 
     @Override
-    public void save(ParcoAutoDto parcoAutoDto) {
+    public ParcoAutoDto save(ParcoAutoDto parcoAutoDto) {
           List<Auto> autoList = autoRepository.getAllByParcoAutoId(parcoAutoDto.getId());
           ParcoAuto parcoAuto = parcoAutoConverter.convertDtoToEntity(parcoAutoDto,autoList);
-          parcoAutoRepository.save(parcoAuto);
+          parcoAuto = parcoAutoRepository.save(parcoAuto);
+          return parcoAutoConverter.convertEntityToDto(parcoAuto);
     }
+
 
     @Override
     public void associate(Long idParcoAuto, Long idAuto) {
@@ -50,8 +50,6 @@ public class ParcoAutoServiceImpl implements ParcoAutoService {
                 associate(idParco, id);
         }
     }
-
-
 
     @Override
     public List<AutoDto> autoLibere() {

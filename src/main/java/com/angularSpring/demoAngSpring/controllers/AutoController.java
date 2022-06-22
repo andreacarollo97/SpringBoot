@@ -2,6 +2,7 @@ package com.angularSpring.demoAngSpring.controllers;
 
 
 import com.angularSpring.demoAngSpring.dto.AutoDto;
+import com.angularSpring.demoAngSpring.dto.EditAutoDto;
 import com.angularSpring.demoAngSpring.services.AutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,14 +36,11 @@ public class AutoController {
         return new ResponseEntity<>(autoService.findById(id),HttpStatus.OK);
     }
 
-    @PostMapping("/salva")
-    public ResponseEntity<AutoDto> salvaAuto(@RequestBody AutoDto autoDto) {
-        return new ResponseEntity<>(autoService.save(autoDto), HttpStatus.CREATED);
-    }
 
-   @PutMapping("/edit/{id}")
-    public ResponseEntity<AutoDto> editAuto(@RequestBody AutoDto autoDto) {
-       return new ResponseEntity<>(autoService.save(autoDto), HttpStatus.OK);
+   @PostMapping("/salva")
+    public ResponseEntity<?> salvaAuto(@RequestBody EditAutoDto editAutoDto) {
+       autoService.edit(editAutoDto);
+       return new ResponseEntity<>(HttpStatus.OK);
    }
 
    @DeleteMapping("/elimina/{id}")

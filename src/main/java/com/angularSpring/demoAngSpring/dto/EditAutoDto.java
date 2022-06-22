@@ -1,9 +1,6 @@
 package com.angularSpring.demoAngSpring.dto;
 
-
-
-
-public class AutoDto {
+public class EditAutoDto {
 
     private Long id;
 
@@ -13,20 +10,9 @@ public class AutoDto {
 
     private String targa;
 
-    private String nomeParcoAuto;
-
-    public String getNomeParcoAuto() {
-        return nomeParcoAuto;
-    }
-
-    public void setNomeParcoAuto(String nomeParcoAuto) {
-        this.nomeParcoAuto = nomeParcoAuto;
-    }
-
     public Long getId() {
         return id;
     }
-
 
     public void setId(Long id) {
         this.id = id;
