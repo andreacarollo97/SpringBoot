@@ -7,12 +7,14 @@ import java.util.List;
 
 public interface UserService {
 
-    UserDetailDto save(UserDetailDto userDetailDto);
+    void save(UserDetailDto userDetailDto);
 
-    UserDetailDto findById(Long id);
+    UserDto findById(Long id);
 
     List<UserDto> findAll();
 
     void delete(Long id);
+
+    List<UserDto> findAllByRuoloNot(String ruolo);
 
 }

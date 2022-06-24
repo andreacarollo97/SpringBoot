@@ -25,13 +25,7 @@ public class UserConverter {
     public List<UserDto> entityToDto(List<User> users) {
         List<UserDto> userResponse = new ArrayList<>();
         for (User user : users) {
-            UserDto response = new UserDto();
-            response.setId(user.getId());
-            response.setNome(user.getNome());
-            response.setCognome(user.getCognome());
-            response.setEmail(user.getEmail());
-            response.setRuolo(user.getRuolo());
-            userResponse.add(response);
+            userResponse.add(convertEntityToDto(user));
         }
         return userResponse;
     }
@@ -45,6 +39,16 @@ public class UserConverter {
         userDetailDto.setPassword(user.getPassword());
         userDetailDto.setRuolo(user.getRuolo());
         return userDetailDto;
+    }
+
+    public UserDto convertEntityToDto(User user){
+        UserDto userDto = new UserDto();
+        userDto.setId(user.getId());
+        userDto.setNome(user.getNome());
+        userDto.setCognome(user.getCognome());
+        userDto.setEmail(user.getEmail());
+        userDto.setRuolo(user.getRuolo());
+        return userDto;
     }
 
     public User convertDetailDtoToEntity(UserDetailDto userDetailDto){

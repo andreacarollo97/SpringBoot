@@ -21,14 +21,10 @@ public class AutoServiceImpl implements AutoService {
         this.autoConverter = autoConverter;
         this.autoRepository = autoRepository;
     }
-    @Override
-    public void save(AutoDto autoDto) {
-        Auto auto = autoConverter.convertDtoToEntity(autoDto);
-        autoRepository.save(auto);
-    }
+
 
     @Override
-    public void edit(EditAutoDto editAutoDto) {
+    public void salva(EditAutoDto editAutoDto) {
         Auto auto;
         if (editAutoDto.getId() != null) {
             auto = autoRepository.getAutoById(editAutoDto.getId());
@@ -50,6 +46,12 @@ public class AutoServiceImpl implements AutoService {
     @Override
     public List<AutoDto> findAll() {
         List<Auto> autos = autoRepository.getAllBy();
+        return autoConverter.convertListOfEntityToDto(autos);
+    }
+
+    @Override
+    public List<AutoDto> listAutoNonLibere() {
+        List<Auto> autos = autoRepository.getAutoByParcoAutoIsNotNull();
         return autoConverter.convertListOfEntityToDto(autos);
     }
 

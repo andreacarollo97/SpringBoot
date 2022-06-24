@@ -30,6 +30,11 @@ public class AutoController {
         return new ResponseEntity<>(autoService.findAll(), HttpStatus.OK);
     }
 
+    @GetMapping("/elencoAutoAssegnate")
+    public ResponseEntity<List<AutoDto>> elencoAutoAssegnate() {
+        return new ResponseEntity<>(autoService.listAutoNonLibere(), HttpStatus.OK);
+    }
+
 
     @GetMapping("/detail/{id}")
     public ResponseEntity<AutoDto> ottieniAuto(@PathVariable Long id){
@@ -39,7 +44,7 @@ public class AutoController {
 
    @PostMapping("/salva")
     public ResponseEntity<?> salvaAuto(@RequestBody EditAutoDto editAutoDto) {
-       autoService.edit(editAutoDto);
+       autoService.salva(editAutoDto);
        return new ResponseEntity<>(HttpStatus.OK);
    }
 

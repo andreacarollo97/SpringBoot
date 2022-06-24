@@ -9,13 +9,14 @@ import java.util.List;
 
 public interface AutoService {
 
-    void save(AutoDto autoDto);
 
-    void edit(EditAutoDto editAutoDto);
+    void salva(EditAutoDto editAutoDto);
 
     AutoDto findById(Long id);
 
     List<AutoDto> findAll();
+
+    List<AutoDto> listAutoNonLibere();
 
     void delete(Long id);
 

@@ -30,22 +30,22 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public UserDetailDto save(UserDetailDto userDetailDto) {
+    public void save(UserDetailDto userDetailDto) {
         UserLogged userLogged = (UserLogged) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (userLogged.getRuolo().equals("ADMIN") && !userDetailDto.getRuolo().equals("USER") && (!userLogged.getId().equals(userDetailDto.getId()))){
+        if (userLogged.getRuolo().equals("ROLE_ADMIN") && (userDetailDto.getRuolo().equals("ROLE_SUPER"))){
           throw new RuntimeException("Non hai i permessi per eseguire quest'operazione");
         }
         User user = userConverter.convertDetailDtoToEntity(userDetailDto);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user = userRepository.save(user);
-        return userConverter.convertEntityToDetailDto(user);
+        userConverter.convertEntityToDetailDto(user);
 
     }
 
     @Override
-    public UserDetailDto findById(Long id) {
+    public UserDto findById(Long id) {
         User user = userRepository.getUserById(id);
-        return userConverter.convertEntityToDetailDto(user);
+        return userConverter.convertEntityToDto(user);
     }
 
     @Override
@@ -56,13 +56,19 @@ public class UserServiceImpl implements UserService {
     @Override
     public void delete(Long id) {
         UserLogged userLogged = (UserLogged) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (userLogged.getRuolo().equals("ADMIN")){
-            userRepository.deleteByIdAndRuolo(id,"USER");
-        } else if (userLogged.getRuolo().equals("SUPER")) {
-            userRepository.deleteByIdAndRuolo(id,"ADMIN");
+        if (userLogged.getRuolo().equals("ROLE_ADMIN")){
+            userRepository.deleteByIdAndRuolo(id,"ROLE_USER");
+        } else if (userLogged.getRuolo().equals("ROLE_SUPER")) {
+            userRepository.deleteByIdAndRuolo(id,"ROLE_ADMIN");
         }
         else {
             throw new RuntimeException("Non hai i permessi per eseguire quest'operazione");
         }
+    }
+
+    @Override
+    public List<UserDto> findAllByRuoloNot(String ruolo) {
+        List<User> users = userRepository.getAllByRuoloNot(ruolo);
+        return userConverter.entityToDto(users);
     }
 }

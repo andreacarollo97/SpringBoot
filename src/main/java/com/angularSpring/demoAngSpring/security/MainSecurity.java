@@ -91,6 +91,10 @@ public class MainSecurity extends WebSecurityConfigurerAdapter {
             "/api/user/**"
     };
 
+    private static final String[] SUPER_USER= {
+            "/api/auto/elenco"
+    };
+
   //toDo: studiare hasRole vs hasAuthority
 
     @Override
@@ -100,6 +104,7 @@ public class MainSecurity extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/api/auth/**").permitAll()
                 .antMatchers(SUPER_ADMIN).hasAnyAuthority("ROLE_SUPER","ROLE_ADMIN")
+                .antMatchers(SUPER_USER).hasAnyAuthority("ROLE_SUPER","ROLE_USER")
                 .antMatchers(SUPER).hasAuthority("ROLE_SUPER")
                 .antMatchers(ADMIN).hasAuthority("ROLE_ADMIN")
                 .antMatchers(USER).hasAuthority("ROLE_USER")

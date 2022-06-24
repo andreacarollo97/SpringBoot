@@ -30,21 +30,23 @@ public class UserController {
         return new ResponseEntity<>(userService.findAll(), HttpStatus.OK);
     }
 
+    @GetMapping("/elencoFiltered/{ruolo}")
+    public ResponseEntity<List<UserDto>> elencoUser(@PathVariable String ruolo) {
+        return new ResponseEntity<>(userService.findAllByRuoloNot(ruolo), HttpStatus.OK);
+    }
+
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserDetailDto> ottieniUser(@PathVariable Long id){
+    public ResponseEntity<UserDto> ottieniUser(@PathVariable Long id){
         return new ResponseEntity<>(userService.findById(id),HttpStatus.OK);
     }
 
     @PostMapping("/salva")
-    public ResponseEntity<UserDetailDto> salvaUser(@RequestBody UserDetailDto userDetailDto) {
-        return new ResponseEntity<>(userService.save(userDetailDto), HttpStatus.CREATED);
+    public ResponseEntity<?> salvaUser(@RequestBody UserDetailDto userDetailDto) {
+        userService.save(userDetailDto);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @PutMapping("/edit")
-    public ResponseEntity<UserDetailDto> editUser(@RequestBody UserDetailDto userDetailDto) {
-        return new ResponseEntity<>(userService.save(userDetailDto), HttpStatus.OK);
-    }
 
    @DeleteMapping("/elimina/{id}")
     public ResponseEntity<?> eliminaUser(@PathVariable Long id) {
