@@ -70,10 +70,7 @@ public class MainSecurity extends WebSecurityConfigurerAdapter {
             "/api/prenotazione/edit/**",
             "/api/prenotazione/elimina/**",
             "/api/prenotazione/detail/**",
-            "/api/auto/edit/**",
-            "/api/auto/elimina/**",
-            "/api/auto/detail/**",
-            "/api/auto/salva/**",
+
 
     };
     private static final String[] USER = {
@@ -88,7 +85,12 @@ public class MainSecurity extends WebSecurityConfigurerAdapter {
     };
 
     private static final String[] SUPER_ADMIN= {
-            "/api/user/**"
+            "/api/user/**",
+            "/api/auto/edit/**",
+            "/api/auto/elimina/**",
+            "/api/auto/detail/**",
+            "/api/auto/salva/**",
+
     };
 
     private static final String[] SUPER_USER= {

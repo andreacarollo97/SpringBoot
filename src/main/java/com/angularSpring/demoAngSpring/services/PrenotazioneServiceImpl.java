@@ -76,17 +76,22 @@ public class PrenotazioneServiceImpl implements PrenotazioneService {
     @Override
     public List<Auto> autoDisponibili(LocalDate dataInizio, LocalDate dataFine) {
         List<Prenotazione> prenotazioni = prenotazioneRepository.getPrenotazionesByDataInizioLessThanAndDataFineGreaterThan(dataFine,dataInizio);
-        List<Long> idAutoPrenotate = new ArrayList<>();
+        List<Long> idAutoNonValide = new ArrayList<>();
+        List<Auto> autoLibere = autoRepository.getAutoByParcoAutoIsNull();
 
         for (Prenotazione prenotazione : prenotazioni){
             Long autoId = prenotazione.getAuto().getId();
-            idAutoPrenotate.add(autoId);
+            idAutoNonValide.add(autoId);
         }
-        if (idAutoPrenotate.size() == 0){
+        for (Auto auto : autoLibere){
+            Long autoId = auto.getId();
+            idAutoNonValide.add(autoId);
+        }
+        if (idAutoNonValide.size() == 0){
             return autoRepository.findAll();
         }
         else {
-            return autoRepository.getAutoByIdNotIn(idAutoPrenotate);
+            return autoRepository.getAutoByIdNotIn(idAutoNonValide);
         }
     }
 

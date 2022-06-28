@@ -10,4 +10,5 @@ public interface ParcoAutoRepository extends JpaRepository<ParcoAuto, Long> {
     ParcoAuto getParcoAutoById(Long id);
     List<ParcoAuto> getAllBy();
     ParcoAuto getParcoAutoByNome(String nome);
+
 }

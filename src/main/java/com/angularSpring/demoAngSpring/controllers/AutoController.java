@@ -41,6 +41,11 @@ public class AutoController {
         return new ResponseEntity<>(autoService.findById(id),HttpStatus.OK);
     }
 
+    @GetMapping("/selected/{id}")
+    public ResponseEntity<AutoDto> ottieniAutoDaAssociare(@PathVariable Long id){
+        return new ResponseEntity<>(autoService.findById(id),HttpStatus.OK);
+    }
+
 
    @PostMapping("/salva")
     public ResponseEntity<?> salvaAuto(@RequestBody EditAutoDto editAutoDto) {

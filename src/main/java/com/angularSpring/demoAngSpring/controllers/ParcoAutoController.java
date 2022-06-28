@@ -1,5 +1,6 @@
 package com.angularSpring.demoAngSpring.controllers;
 
+import com.angularSpring.demoAngSpring.dto.AutoAssociateDto;
 import com.angularSpring.demoAngSpring.dto.AutoDto;
 import com.angularSpring.demoAngSpring.dto.ParcoAutoDto;
 import com.angularSpring.demoAngSpring.services.ParcoAutoService;
@@ -43,6 +44,7 @@ public class ParcoAutoController {
     }
 
 
+
     @PostMapping("/salva")
     public ResponseEntity<?> salvaParco(@RequestBody ParcoAutoDto parcoAutoDto) {
         parcoAutoService.save(parcoAutoDto);
@@ -50,8 +52,8 @@ public class ParcoAutoController {
     }
 
     @PostMapping("/associate")
-    public ResponseEntity<?> associaAuto(@RequestParam("idAuto") Long idAuto, @RequestParam("idParcoAuto") Long idParcoAuto) {
-        parcoAutoService.associate(idParcoAuto,idAuto);
+    public ResponseEntity<?> associaAuto(@RequestBody AutoAssociateDto autoAssociateDto) {
+        parcoAutoService.associate(autoAssociateDto.getIdParcoAuto(), autoAssociateDto.getIdAuto());
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
